@@ -1,0 +1,21 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Developer monitoring secure code dashboards">
+  <rect width="1200" height="720" fill="#F7FCFD"/>
+  <rect x="76" y="82" width="1048" height="556" rx="42" fill="#FFFFFF" stroke="#DCE8ED" stroke-width="4"/>
+  <rect x="122" y="132" width="378" height="390" rx="24" fill="#101923"/>
+  <rect x="536" y="132" width="542" height="180" rx="24" fill="#E9F4F6"/>
+  <rect x="536" y="342" width="246" height="180" rx="24" fill="#17212B"/>
+  <rect x="814" y="342" width="264" height="180" rx="24" fill="#E9F4F6"/>
+  <path d="M166 192H304M166 238H424M166 284H365M166 330H438M166 376H322M166 422H404" stroke="#8EE0DC" stroke-width="13" stroke-linecap="round"/>
+  <path d="M333 192H425M388 284H440M352 376H444" stroke="#F4B84B" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="668" cy="222" r="58" fill="#0C8F9A"/>
+  <path d="M642 222L662 242L699 201" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M766 185H1010M766 222H966M766 259H1032" stroke="#6B7A86" stroke-width="13" stroke-linecap="round"/>
+  <path d="M578 432H740" stroke="#8EE0DC" stroke-width="13" stroke-linecap="round"/>
+  <path d="M578 472H690" stroke="#F26F5B" stroke-width="13" stroke-linecap="round"/>
+  <path d="M862 438C888 401 926 398 948 438C968 474 1014 464 1034 418" stroke="#0C8F9A" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="682" cy="580" r="54" fill="#F4C7A1"/>
+  <path d="M614 673C626 617 652 590 682 590C712 590 738 617 750 673H614Z" fill="#066670"/>
+  <path d="M626 563C642 503 726 503 740 564C704 548 664 548 626 563Z" fill="#17212B"/>
+  <rect x="416" y="588" width="384" height="70" rx="14" fill="#101923"/>
+  <path d="M470 623H748" stroke="#F4B84B" stroke-width="10" stroke-linecap="round" stroke-dasharray="28 18"/>
+</svg>
