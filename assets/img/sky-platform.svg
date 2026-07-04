@@ -1,0 +1,26 @@
+<svg width="920" height="760" viewBox="0 0 920 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Connected cloud platform above city skyline">
+  <rect x="58" y="66" width="804" height="592" rx="48" fill="#FFFFFF"/>
+  <rect x="58" y="66" width="804" height="592" rx="48" stroke="#DCE6ED" stroke-width="3"/>
+  <path d="M159 612H760" stroke="#DCE6ED" stroke-width="4" stroke-linecap="round"/>
+  <path d="M190 612V502H255V612H190Z" fill="#E9F4F6"/>
+  <path d="M278 612V444H354V612H278Z" fill="#CCE8EC"/>
+  <path d="M380 612V481H444V612H380Z" fill="#E9F4F6"/>
+  <path d="M468 612V407H554V612H468Z" fill="#B6DEE4"/>
+  <path d="M582 612V465H654V612H582Z" fill="#E9F4F6"/>
+  <path d="M680 612V518H730V612H680Z" fill="#CCE8EC"/>
+  <path d="M209 533H236M209 561H236M209 589H236" stroke="#8DBAC2" stroke-width="6" stroke-linecap="round"/>
+  <path d="M302 481H330M302 512H330M302 543H330M302 574H330" stroke="#619EA8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M495 448H527M495 486H527M495 524H527M495 562H527" stroke="#4B909A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M226 302C226 254.5 264.5 216 312 216C319.8 216 327.4 217 334.6 219C354.7 181.8 394.2 156.5 439.5 156.5C500.4 156.5 550.6 202.2 557.7 261.2C567.3 257.9 577.5 256.1 588 256.1C640.5 256.1 683 298.6 683 351.1C683 403.6 640.5 446.1 588 446.1H307.5C262.5 446.1 226 409.6 226 364.6V302Z" fill="#F7FBFC"/>
+  <path d="M226 302C226 254.5 264.5 216 312 216C319.8 216 327.4 217 334.6 219C354.7 181.8 394.2 156.5 439.5 156.5C500.4 156.5 550.6 202.2 557.7 261.2C567.3 257.9 577.5 256.1 588 256.1C640.5 256.1 683 298.6 683 351.1C683 403.6 640.5 446.1 588 446.1H307.5C262.5 446.1 226 409.6 226 364.6V302Z" stroke="#066670" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="441" cy="306" r="56" fill="#0C8F9A"/>
+  <path d="M413 306H469M441 278V334" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="308" cy="349" r="28" fill="#F4B84B"/>
+  <circle cx="587" cy="342" r="28" fill="#F26F5B"/>
+  <circle cx="533" cy="214" r="24" fill="#6FBA71"/>
+  <path d="M336 349H384M497 306H559M517 232L471 274" stroke="#17212B" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 14"/>
+  <path d="M184 154L213 125L242 154" stroke="#F4B84B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M731 182L760 153L789 182" stroke="#F26F5B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M151 253H201" stroke="#6FBA71" stroke-width="8" stroke-linecap="round"/>
+  <path d="M718 512H774" stroke="#0C8F9A" stroke-width="8" stroke-linecap="round"/>
+</svg>

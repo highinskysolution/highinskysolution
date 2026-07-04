@@ -1,0 +1,19 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Software engineer building web applications at night">
+  <rect width="1200" height="720" fill="#17212B"/>
+  <path d="M82 110H1118V610H82V110Z" fill="#0B141B" stroke="#36505A" stroke-width="5"/>
+  <path d="M82 110H1118V170H82V110Z" fill="#243341"/>
+  <circle cx="130" cy="140" r="10" fill="#F26F5B"/>
+  <circle cx="164" cy="140" r="10" fill="#F4B84B"/>
+  <circle cx="198" cy="140" r="10" fill="#6FBA71"/>
+  <rect x="140" y="220" width="360" height="232" rx="20" fill="#101923" stroke="#2C3A45" stroke-width="4"/>
+  <rect x="544" y="220" width="516" height="232" rx="20" fill="#101923" stroke="#2C3A45" stroke-width="4"/>
+  <path d="M186 276H338M186 318H446M186 360H384M186 402H424" stroke="#8EE0DC" stroke-width="13" stroke-linecap="round"/>
+  <path d="M366 276H446M416 360H462" stroke="#F4B84B" stroke-width="13" stroke-linecap="round"/>
+  <path d="M602 326L666 270M602 326L666 382M1002 326L938 270M1002 326L938 382" stroke="#F26F5B" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M760 392L842 260" stroke="#8EE0DC" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="604" cy="555" r="52" fill="#F4C7A1"/>
+  <path d="M540 658C552 604 574 578 604 578C634 578 656 604 668 658H540Z" fill="#0C8F9A"/>
+  <path d="M548 538C563 482 646 482 660 540C626 524 587 524 548 538Z" fill="#101923"/>
+  <rect x="434" y="584" width="354" height="72" rx="14" fill="#243341" stroke="#36505A" stroke-width="4"/>
+  <path d="M480 620H742" stroke="#F4B84B" stroke-width="10" stroke-linecap="round"/>
+</svg>
