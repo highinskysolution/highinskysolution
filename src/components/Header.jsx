@@ -34,9 +34,9 @@ const Header = () => {
       <nav className="mx-auto max-w-7xl h-full px-6 lg:px-8 flex items-center justify-between">
         
         {/* Brand */}
-        <Link className="flex items-center gap-3 relative z-50" to="/">
-          <img src="/assets/img/mark.png" alt="Logo" className="w-8 h-8 object-contain" />
-          <span className="font-bold text-[1.1rem] text-ink tracking-tight">HIGH IN SKY SOLUTIONS</span>
+        <Link className="flex items-center gap-2 sm:gap-3 relative z-50 max-w-[70%]" to="/">
+          <img src="/assets/img/mark.png" alt="Logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain shrink-0" />
+          <span className="font-bold text-xs sm:text-[1.1rem] text-ink tracking-tight truncate">HIGH IN SKY SOLUTIONS</span>
         </Link>
         
         {/* Mobile Toggle Button */}
