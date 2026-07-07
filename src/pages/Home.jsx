@@ -15,12 +15,12 @@ const Home = () => {
             loop 
             muted 
             playsInline 
-            className="w-full h-full object-cover opacity-[0.25] mix-blend-screen scale-105"
+            className="w-full h-full object-cover opacity-70 mix-blend-screen scale-105"
           >
             <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-abstract-digital-data-background-32694-large.mp4" type="video/mp4" />
           </video>
-          {/* Dark Overlay Gradient to blend video smoothly into the next section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-paper/50 via-paper/80 to-paper"></div>
+          {/* Subtle overlay so text remains readable, fading into the section below */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-paper/40 to-paper"></div>
         </div>
 
         {/* Subtle Ambient Glow */}
