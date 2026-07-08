@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HackerBackground from '../components/HackerBackground';
 
 const Home = () => {
   return (
@@ -10,15 +11,7 @@ const Home = () => {
         
         {/* 3D Coding Video Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="w-full h-full object-cover opacity-70 mix-blend-screen scale-105"
-          >
-            <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
-          </video>
+          <HackerBackground />
           {/* Subtle overlay so text remains readable, fading into the section below */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-paper/40 to-paper"></div>
         </div>
