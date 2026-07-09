@@ -18,6 +18,136 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "healthy", timestamp: new Date() });
 });
 
+// Database connection and Auth routes
+import mongoose from "mongoose";
+import crypto from "crypto";
+
+const MONGODB_URI = process.env.MONGODB_URI;
+let useLocalMockDB = false;
+
+if (MONGODB_URI) {
+  mongoose.connect(MONGODB_URI)
+    .then(() => console.log("SUCCESS: Connected to MongoDB Atlas Cloud Database"))
+    .catch((err) => {
+      console.error("MongoDB Atlas connection error:", err);
+      console.warn("Falling back to local in-memory database for authentication.");
+      useLocalMockDB = true;
+    });
+} else {
+  console.warn("WARNING: MONGODB_URI environment variable is missing.");
+  console.warn("Falling back to local in-memory database for authentication.");
+  useLocalMockDB = true;
+}
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+const mockUsers = [];
+
+const hashPassword = (password) => {
+  return crypto.createHash("sha256").update(password).digest("hex");
+};
+
+// Auth Signup Route
+app.post("/api/auth/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: "Name, email, and password are required." });
+  }
+
+  try {
+    const searchEmail = email.toLowerCase();
+    
+    if (useLocalMockDB) {
+      const existing = mockUsers.find(u => u.email === searchEmail);
+      if (existing) {
+        return res.status(400).json({ success: false, message: "Email is already registered." });
+      }
+      
+      const hashedPassword = hashPassword(password);
+      const newUser = { name, email: searchEmail, password: hashedPassword, createdAt: new Date() };
+      mockUsers.push(newUser);
+      
+      console.log(`[MOCK DB] User registered: ${name} (${searchEmail})`);
+      return res.status(201).json({
+        success: true,
+        message: "Registration successful (Mock DB)!",
+        user: { name, email: searchEmail }
+      });
+    }
+
+    // Connect MongoDB and save
+    const existingUser = await User.findOne({ email: searchEmail });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: "Email is already registered." });
+    }
+
+    const hashedPassword = hashPassword(password);
+    const newUser = new User({ name, email: searchEmail, password: hashedPassword });
+    await newUser.save();
+
+    console.log(`[MONGODB] User registered: ${name} (${searchEmail})`);
+    return res.status(201).json({
+      success: true,
+      message: "Registration successful!",
+      user: { name, email: searchEmail }
+    });
+  } catch (error) {
+    console.error("Express signup error:", error);
+    return res.status(500).json({ success: false, message: "Server error during registration." });
+  }
+});
+
+// Auth Login Route
+app.post("/api/auth/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ success: false, message: "Email and password are required." });
+  }
+
+  try {
+    const searchEmail = email.toLowerCase();
+    const hashedPassword = hashPassword(password);
+
+    if (useLocalMockDB) {
+      const user = mockUsers.find(u => u.email === searchEmail);
+      if (!user || user.password !== hashedPassword) {
+        return res.status(400).json({ success: false, message: "Invalid email or password." });
+      }
+      
+      console.log(`[MOCK DB] User logged in: ${user.name} (${searchEmail})`);
+      return res.status(200).json({
+        success: true,
+        message: "Login successful (Mock DB)!",
+        user: { name: user.name, email: searchEmail }
+      });
+    }
+
+    // Connect MongoDB and query
+    const user = await User.findOne({ email: searchEmail });
+    if (!user || user.password !== hashedPassword) {
+      return res.status(400).json({ success: false, message: "Invalid email or password." });
+    }
+
+    console.log(`[MONGODB] User logged in: ${user.name} (${searchEmail})`);
+    return res.status(200).json({
+      success: true,
+      message: "Login successful!",
+      user: { name: user.name, email: searchEmail }
+    });
+  } catch (error) {
+    console.error("Express login error:", error);
+    return res.status(500).json({ success: false, message: "Server error during login." });
+  }
+});
+
 // Contact Inquiry Submission Route
 app.post("/api/contact", async (req, res) => {
   const { name, email, phone, service, message, _honey } = req.body;

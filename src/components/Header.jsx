@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { currentUser, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,9 +67,34 @@ const Header = () => {
           ))}
         </div>
 
-        {/* CTA Button (Desktop) */}
-        <div className="hidden lg:block relative z-50">
-          <Link to="/contact" className="btn btn-brand">
+        {/* CTA & Auth Button Section (Desktop) */}
+        <div className="hidden lg:flex items-center gap-4 relative z-50">
+          {currentUser ? (
+            <>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface border border-line shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse shadow-glow"></span>
+                <span className="text-ink text-xs font-semibold max-w-[100px] truncate">
+                  {currentUser.name}
+                </span>
+              </div>
+              <button 
+                onClick={logout} 
+                className="text-xs font-semibold uppercase tracking-wider text-muted hover:text-brand transition-colors cursor-pointer focus:outline-none"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className="nav-link text-sm font-semibold">
+                Sign In
+              </NavLink>
+              <Link to="/signup" className="btn btn-secondary py-2 text-xs">
+                Sign Up
+              </Link>
+            </>
+          )}
+          <Link to="/contact" className="btn btn-brand py-2 text-xs">
             Get Quote
           </Link>
         </div>
@@ -91,7 +118,33 @@ const Header = () => {
                 </NavLink>
               ))}
             </div>
-            <div className="mt-auto pt-8">
+            
+            <div className="mt-auto pt-8 flex flex-col gap-4">
+              {currentUser ? (
+                <div className="flex items-center justify-between p-4 rounded-xl bg-surface border border-line">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-brand animate-pulse shadow-glow"></span>
+                    <span className="text-ink font-semibold text-sm truncate max-w-[180px]">
+                      {currentUser.name}
+                    </span>
+                  </div>
+                  <button 
+                    onClick={logout} 
+                    className="text-xs font-bold text-brand uppercase tracking-wider cursor-pointer focus:outline-none"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  <Link to="/login" className="btn btn-secondary py-3 text-center">
+                    Sign In
+                  </Link>
+                  <Link to="/signup" className="btn btn-brand py-3 text-center">
+                    Sign Up
+                  </Link>
+                </div>
+              )}
               <Link to="/contact" className="btn btn-brand w-full py-4 text-center">
                 Discuss a Project
               </Link>
