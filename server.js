@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import cors from "cors";
 import dotenv from "dotenv";
 
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 const app = express();
