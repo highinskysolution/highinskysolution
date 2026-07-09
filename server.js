@@ -22,6 +22,11 @@ app.get("/api/health", (req, res) => {
 // Database connection and Auth routes
 import mongoose from "mongoose";
 import crypto from "crypto";
+import dns from "dns";
+
+if (typeof dns.setDefaultResultOrder === "function") {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 let useLocalMockDB = false;
