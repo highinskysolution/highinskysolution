@@ -154,6 +154,26 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
+// Admin - Get All Members Route
+const ADMIN_KEY = 'hiss-admin-2024';
+app.get("/api/admin/members", async (req, res) => {
+  const adminKey = req.headers['x-admin-key'];
+  if (adminKey !== ADMIN_KEY) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
+  try {
+    if (useLocalMockDB) {
+      const members = mockUsers.map(u => ({ name: u.name, createdAt: u.createdAt }));
+      return res.status(200).json({ success: true, members });
+    }
+    const users = await User.find({}, 'name createdAt').sort({ createdAt: -1 });
+    return res.status(200).json({ success: true, members: users });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Contact Inquiry Submission Route
 app.post("/api/contact", async (req, res) => {
   const { name, email, phone, service, message, _honey } = req.body;
