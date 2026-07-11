@@ -42,14 +42,11 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error("[TEST-DB] Connection error:", error);
-    const MONGODB_URI = process.env.MONGODB_URI;
-    const maskedUri = MONGODB_URI ? MONGODB_URI.replace(/:([^@]+)@/, ":*****@") : "not_configured";
     return res.status(500).json({
       success: false,
       error: error.message || error,
       stack: error.stack,
-      name: error.name,
-      uri: maskedUri
+      name: error.name
     });
   }
 }

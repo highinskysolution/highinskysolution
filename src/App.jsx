@@ -12,6 +12,8 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 // Scroll to top and re-init AOS on route change
 function ScrollToTop() {
@@ -62,6 +64,9 @@ function App() {
             <Route path="/contact.html" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            {/* Hidden admin routes - not linked anywhere in public UI */}
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />
