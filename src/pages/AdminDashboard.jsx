@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ADMIN_KEY = 'hiss-admin-2024';
-// In development Vite runs on :5173, Express API on :5000
-// In production (Vercel) the /api routes are serverless functions
-const API_BASE = import.meta.env.DEV ? 'http://localhost:5000' : '';
 
 export default function AdminDashboard() {
   const [members, setMembers] = useState([]);
@@ -26,7 +23,7 @@ export default function AdminDashboard() {
   const fetchMembers = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE}/api/admin/members`, {
+      const res = await fetch('/api/admin/members', {
         headers: { 'x-admin-key': ADMIN_KEY }
       });
       const data = await res.json();
