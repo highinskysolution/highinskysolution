@@ -1,4 +1,4 @@
-import connectDB from '../lib/db.js';
+import { connectDB } from '../lib/db.js';
 import User from '../models/User.js';
 
 // Hardcoded admin credentials - never exposed to client
