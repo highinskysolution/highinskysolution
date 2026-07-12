@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Admin credentials (client-side check + server-side key)
-const ADMIN_USERNAME = 'highinskyadmin';
-const ADMIN_PASSWORD = 'HISS@Admin2024';
+const ADMIN_USERNAME = 'Gagan@10052007';
+const ADMIN_PASSWORD = 'GGDEVELOPER';
 const ADMIN_KEY = 'hiss-admin-2024';
 
 export default function AdminLogin() {
