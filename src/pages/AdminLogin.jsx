@@ -32,7 +32,7 @@ export default function AdminLogin() {
       {/* Animated grid background */}
       <div style={styles.grid}></div>
 
-      <div style={styles.card}>
+      <div style={styles.card} className="admin-card">
         {/* Shield icon */}
         <div style={styles.iconWrap}>
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -117,6 +117,18 @@ export default function AdminLogin() {
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 480px) {
+          .admin-card {
+            padding: 32px 20px !important;
+            border-radius: 16px !important;
+          }
+          .admin-card h1 {
+            font-size: 22px !important;
+          }
+          .admin-card input {
+            font-size: 16px !important;
+          }
         }
       `}</style>
     </div>

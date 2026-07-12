@@ -33,13 +33,13 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-paper flex items-center justify-center pt-28 pb-16 relative overflow-hidden">
+    <div className="min-h-screen bg-paper flex items-center justify-center pt-20 sm:pt-28 pb-8 sm:pb-16 px-4 relative overflow-hidden">
       {/* Background Ambient Glows */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="w-full max-w-md mx-6 relative z-10" data-aos="fade-up">
-        <div className="bg-surface border border-line rounded-2xl p-8 shadow-card relative overflow-hidden">
+      <div className="w-full max-w-md relative z-10" data-aos="fade-up">
+        <div className="bg-surface border border-line rounded-2xl p-6 sm:p-8 shadow-card relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand/5 rounded-full blur-[60px] pointer-events-none"></div>
           
           <div className="text-center mb-8">
