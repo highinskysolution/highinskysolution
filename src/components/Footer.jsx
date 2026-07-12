@@ -72,9 +72,14 @@ const Footer = () => {
         </div>
 
         {/* Bottom Row: Copyright */}
-        <div className="pt-8 border-t border-line flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-muted uppercase tracking-widest">
-          <span>&copy; 2026 HIGH IN SKY SOLUTIONS. All rights reserved.</span>
-          <span>Engineered by GG DEVELOPERS.</span>
+        <div className="pt-8 border-t border-line flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted tracking-widest">
+          <span className="font-bold uppercase">&copy; 2026 HIGH IN SKY SOLUTIONS. All rights reserved.</span>
+          <span className="text-center">
+            Designed &amp; Developed by{' '}
+            <span className="text-brand font-bold">HIGH IN SKY SOLUTIONS</span>
+            {' '}· Powered by{' '}
+            <span className="text-brand font-bold">Antigravity AI</span>
+          </span>
         </div>
       </div>
     </footer>
