@@ -78,7 +78,7 @@ const Signup = () => {
                 className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/30"
                 id="name"
                 type="text"
-                placeholder="Gagan Moolya"
+                placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -93,7 +93,7 @@ const Signup = () => {
                 className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/30"
                 id="email"
                 type="email"
-                placeholder="gagan@highinskysolutions.com"
+                placeholder="example@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
