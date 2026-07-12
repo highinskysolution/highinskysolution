@@ -6,10 +6,12 @@
   html {
     scroll-behavior: smooth;
     background-color: #0a0a0a;
+    overflow-x: hidden;
   }
   
   body {
     @apply bg-paper text-ink font-sans antialiased selection:bg-brand/30 selection:text-brand-light;
+    overflow-x: hidden;
   }
   
   /* Fluid, sharp typography */

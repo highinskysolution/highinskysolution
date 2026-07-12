@@ -177,7 +177,7 @@ const Home = () => {
       </section>
 
       {/* Structured Text Section */}
-      <section className="py-24 lg:py-32 bg-surface">
+      <section className="py-24 lg:py-32 bg-surface overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-5" data-aos="fade-right">

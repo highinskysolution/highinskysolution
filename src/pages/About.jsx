@@ -17,7 +17,7 @@ const About = () => {
       </section>
 
       {/* Core Principles */}
-      <section className="py-24 lg:py-32 border-b border-line bg-paper">
+      <section className="py-24 lg:py-32 border-b border-line bg-paper overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             
@@ -59,7 +59,7 @@ const About = () => {
       </section>
 
       {/* Founder Section - Clean Grid */}
-      <section className="py-24 lg:py-32 bg-surface">
+      <section className="py-24 lg:py-32 bg-surface overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
             
