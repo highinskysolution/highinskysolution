@@ -57,7 +57,7 @@ export default function AdminLogin() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} style={styles.form}>
+        <form onSubmit={handleLogin} style={styles.form} autoComplete="off">
           <div style={styles.field}>
             <label style={styles.label}>Username</label>
             <input
@@ -84,6 +84,7 @@ export default function AdminLogin() {
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Enter admin password"
                 required
+                autoComplete="new-password"
                 style={{ ...styles.input, paddingRight: '48px' }}
                 onFocus={e => e.target.style.borderColor = '#00d4ff'}
                 onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
