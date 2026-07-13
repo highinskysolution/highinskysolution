@@ -1,0 +1,33 @@
+{
+  "name": "HIGH IN SKY SOLUTIONS",
+  "short_name": "HISS",
+  "description": "Professional web, cloud, automation, and digital-growth solutions from HIGH IN SKY SOLUTIONS.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#06b6d4",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/img/mark.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/img/mark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/assets/img/mark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
