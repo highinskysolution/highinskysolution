@@ -1,0 +1,9 @@
+{
+	"appId": "com.highinskysolutions.app",
+	"appName": "HIGH IN SKY SOLUTIONS",
+	"webDir": "dist",
+	"server": {
+		"url": "https://highinskysolution.vercel.app",
+		"cleartext": true
+	}
+}
