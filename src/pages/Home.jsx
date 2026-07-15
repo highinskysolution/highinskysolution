@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
 
 const Home = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      // Loop slightly before the video fully ends (0.15s buffer)
+      // to eliminate the browser's native seek delay/freeze
+      const buffer = 0.15;
+      if (video.duration && video.currentTime >= video.duration - buffer) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <div className="bg-paper">
       
@@ -12,6 +34,7 @@ const Home = () => {
         {/* Ambient Video & Hacker Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
