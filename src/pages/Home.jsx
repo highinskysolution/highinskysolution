@@ -9,11 +9,23 @@ const Home = () => {
       {/* Enterprise Minimal Hero (Dark) */}
       <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-paper">
         
-        {/* 3D Coding Video Background */}
+        {/* Ambient Video & Hacker Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none"
+            onError={(e) => {
+              e.currentTarget.style.opacity = '0';
+            }}
+          >
+            <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
+          </video>
           <HackerBackground />
           {/* Subtle overlay so text remains readable, fading into the section below */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-paper/40 to-paper"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-paper/50 to-paper"></div>
         </div>
 
         {/* Subtle Ambient Glow */}
