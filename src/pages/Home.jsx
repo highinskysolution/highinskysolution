@@ -18,9 +18,8 @@ const Home = () => {
       const playing = activeVideo === 1 ? v1 : v2;
       const next = activeVideo === 1 ? v2 : v1;
 
-      // Loop slightly before the video fully ends (0.4s buffer)
-      // to eliminate the browser's native seek delay/freeze
-      const buffer = Math.min(0.4, playing.duration / 4 || 0.4);
+      // Loop 0.8 seconds before the video ends to give plenty of overlap time for a smooth fade
+      const buffer = Math.min(0.8, playing.duration / 3 || 0.8);
       
       if (!isTransitioning && playing.duration && playing.currentTime >= playing.duration - buffer) {
         isTransitioning = true;
@@ -28,19 +27,38 @@ const Home = () => {
         // Start next video playing from beginning
         next.currentTime = 0;
         next.play().then(() => {
-          // Swap visibility
-          activeVideo = activeVideo === 1 ? 2 : 1;
-          v1.style.opacity = activeVideo === 1 ? '0.4' : '0';
-          v2.style.opacity = activeVideo === 2 ? '0.4' : '0';
+          let hasSwapped = false;
           
-          // Pause the previous video after they cross-fade
-          setTimeout(() => {
-            playing.pause();
-            isTransitioning = false;
-          }, 350);
+          const performSwap = () => {
+            if (hasSwapped) return;
+            hasSwapped = true;
+            next.removeEventListener('timeupdate', checkStarted);
+            
+            // Swap active state and trigger CSS opacity transition
+            activeVideo = activeVideo === 1 ? 2 : 1;
+            v1.style.opacity = activeVideo === 1 ? '0.4' : '0';
+            v2.style.opacity = activeVideo === 2 ? '0.4' : '0';
+            
+            // Pause the previous video only after they have fully cross-faded
+            setTimeout(() => {
+              playing.pause();
+              isTransitioning = false;
+            }, 600);
+          };
+
+          const checkStarted = () => {
+            // Verify the next video is actually moving and rendering frames
+            if (next.currentTime > 0.03) {
+              performSwap();
+            }
+          };
+
+          next.addEventListener('timeupdate', checkStarted);
+          
+          // Safety fallback: swap anyway after 150ms if timeupdate is slow
+          setTimeout(performSwap, 150);
         }).catch(err => {
           console.log("Seamless loop play transition blocked or failed:", err);
-          // Fallback: reset the current video if play fails
           playing.currentTime = 0;
           isTransitioning = false;
         });
