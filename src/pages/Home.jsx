@@ -24,8 +24,7 @@ const Home = () => {
       if (!isTransitioning && playing.duration && playing.currentTime >= playing.duration - buffer) {
         isTransitioning = true;
         
-        // Start next video playing from beginning
-        next.currentTime = 0;
+        // Next video is already pre-parked at 0, so it starts instantly without seek delay!
         next.play().then(() => {
           let hasSwapped = false;
           
@@ -34,29 +33,30 @@ const Home = () => {
             hasSwapped = true;
             next.removeEventListener('timeupdate', checkStarted);
             
-            // Swap active state and trigger CSS opacity transition
+            // Swap active state and trigger CSS opacity transition (300ms duration)
             activeVideo = activeVideo === 1 ? 2 : 1;
             v1.style.opacity = activeVideo === 1 ? '0.4' : '0';
             v2.style.opacity = activeVideo === 2 ? '0.4' : '0';
             
-            // Pause the previous video only after they have fully cross-faded
+            // Pause and park the previous video at 0 so it's ready for the next cycle
             setTimeout(() => {
               playing.pause();
+              playing.currentTime = 0;
               isTransitioning = false;
-            }, 600);
+            }, 400);
           };
 
           const checkStarted = () => {
             // Verify the next video is actually moving and rendering frames
-            if (next.currentTime > 0.03) {
+            if (next.currentTime > 0.02) {
               performSwap();
             }
           };
 
           next.addEventListener('timeupdate', checkStarted);
           
-          // Safety fallback: swap anyway after 150ms if timeupdate is slow
-          setTimeout(performSwap, 150);
+          // Safety fallback: swap anyway after 100ms if timeupdate is slow
+          setTimeout(performSwap, 100);
         }).catch(err => {
           console.log("Seamless loop play transition blocked or failed:", err);
           playing.currentTime = 0;
@@ -91,7 +91,7 @@ const Home = () => {
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none transition-opacity duration-500"
+            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none transition-opacity duration-300"
             style={{ opacity: 0.4 }}
             onError={(e) => {
               e.currentTarget.style.opacity = '0';
@@ -104,7 +104,7 @@ const Home = () => {
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover opacity-0 mix-blend-screen pointer-events-none transition-opacity duration-500"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 mix-blend-screen pointer-events-none transition-opacity duration-300"
             style={{ opacity: 0 }}
             onError={(e) => {
               e.currentTarget.style.opacity = '0';
