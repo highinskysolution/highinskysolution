@@ -16,6 +16,11 @@ const Home = () => {
             loop
             muted
             playsInline
+            preload="auto"
+            onEnded={(e) => {
+              e.currentTarget.currentTime = 0;
+              e.currentTarget.play().catch(() => {});
+            }}
             className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none"
           >
             <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
