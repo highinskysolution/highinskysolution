@@ -3,33 +3,59 @@ import { Link } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
 
 const Home = () => {
-  const videoRef = useRef(null);
+  const videoRef1 = useRef(null);
+  const videoRef2 = useRef(null);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const v1 = videoRef1.current;
+    const v2 = videoRef2.current;
+    if (!v1 || !v2) return;
+
+    let activeVideo = 1;
+    let isTransitioning = false;
 
     const handleTimeUpdate = () => {
-      // Loop 0.4 seconds before the video fully ends.
-      // This is large enough to be caught by the timeupdate event (which runs every 250ms)
-      // and trims any static freeze frame that AI video generators add at the end.
-      const buffer = 0.4;
-      if (video.duration && video.currentTime >= video.duration - buffer) {
-        video.currentTime = 0;
-        video.play().catch(() => {});
+      const playing = activeVideo === 1 ? v1 : v2;
+      const next = activeVideo === 1 ? v2 : v1;
+
+      // Loop slightly before the video fully ends (0.4s buffer)
+      // to eliminate the browser's native seek delay/freeze
+      const buffer = Math.min(0.4, playing.duration / 4 || 0.4);
+      
+      if (!isTransitioning && playing.duration && playing.currentTime >= playing.duration - buffer) {
+        isTransitioning = true;
+        
+        // Start next video playing from beginning
+        next.currentTime = 0;
+        next.play().then(() => {
+          // Swap visibility
+          activeVideo = activeVideo === 1 ? 2 : 1;
+          v1.style.opacity = activeVideo === 1 ? '0.4' : '0';
+          v2.style.opacity = activeVideo === 2 ? '0.4' : '0';
+          
+          // Pause the previous video after they cross-fade
+          setTimeout(() => {
+            playing.pause();
+            isTransitioning = false;
+          }, 350);
+        }).catch(err => {
+          console.log("Seamless loop play transition blocked or failed:", err);
+          // Fallback: reset the current video if play fails
+          playing.currentTime = 0;
+          isTransitioning = false;
+        });
       }
     };
 
-    const handleEnded = () => {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    };
+    v1.addEventListener('timeupdate', handleTimeUpdate);
+    v2.addEventListener('timeupdate', handleTimeUpdate);
 
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('ended', handleEnded);
+    // Start playing first video
+    v1.play().catch(() => {});
+
     return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('ended', handleEnded);
+      v1.removeEventListener('timeupdate', handleTimeUpdate);
+      v2.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, []);
 
@@ -42,12 +68,26 @@ const Home = () => {
         {/* Ambient Video & Hacker Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <video
-            ref={videoRef}
+            ref={videoRef1}
             autoPlay
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none transition-opacity duration-500"
+            style={{ opacity: 0.4 }}
+            onError={(e) => {
+              e.currentTarget.style.opacity = '0';
+            }}
+          >
+            <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
+          </video>
+          <video
+            ref={videoRef2}
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 mix-blend-screen pointer-events-none transition-opacity duration-500"
+            style={{ opacity: 0 }}
             onError={(e) => {
               e.currentTarget.style.opacity = '0';
             }}
