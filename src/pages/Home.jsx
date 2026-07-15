@@ -10,18 +10,26 @@ const Home = () => {
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      // Loop slightly before the video fully ends (0.15s buffer)
-      // to eliminate the browser's native seek delay/freeze
-      const buffer = 0.15;
+      // Loop 0.4 seconds before the video fully ends.
+      // This is large enough to be caught by the timeupdate event (which runs every 250ms)
+      // and trims any static freeze frame that AI video generators add at the end.
+      const buffer = 0.4;
       if (video.duration && video.currentTime >= video.duration - buffer) {
         video.currentTime = 0;
         video.play().catch(() => {});
       }
     };
 
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    };
+
     video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('ended', handleEnded);
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('ended', handleEnded);
     };
   }, []);
 
@@ -36,9 +44,9 @@ const Home = () => {
           <video
             ref={videoRef}
             autoPlay
-            loop
             muted
             playsInline
+            preload="auto"
             className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen pointer-events-none"
             onError={(e) => {
               e.currentTarget.style.opacity = '0';
