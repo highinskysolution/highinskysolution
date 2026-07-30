@@ -147,7 +147,7 @@ export default function AdminDashboard() {
                 <thead>
                   <tr>
                     <th style={styles.th}>#</th>
-                    <th style={styles.th}>Member Name</th>
+                    <th style={styles.th}>Username</th>
                     <th style={{ ...styles.th, textAlign: 'right' }}>Joined</th>
                   </tr>
                 </thead>
@@ -159,10 +159,7 @@ export default function AdminDashboard() {
                     >
                       <td style={styles.tdNum}>{i + 1}</td>
                       <td style={styles.tdName}>
-                        <div style={styles.avatar}>
-                          {m.name.charAt(0).toUpperCase()}
-                        </div>
-                        <span style={styles.nameText}>{m.name}</span>
+                        <span style={styles.nameText}>@{m.name.toLowerCase().replace(/\s+/g, '')}</span>
                       </td>
                       <td style={{ ...styles.td, textAlign: 'right', color: 'rgba(255,255,255,0.4)', fontSize: '13px' }}>
                         {formatDate(m.createdAt)}
