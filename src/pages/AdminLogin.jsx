@@ -21,6 +21,7 @@ export default function AdminLogin() {
       // Store admin session in sessionStorage (clears when browser closes)
       sessionStorage.setItem('adminKey', ADMIN_KEY);
       sessionStorage.setItem('isAdmin', 'true');
+      sessionStorage.setItem('adminName', username);
       navigate('/admin/dashboard');
     } else {
       setError('Invalid admin credentials.');
@@ -38,11 +39,11 @@ export default function AdminLogin() {
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
             <path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.35C17.25 23.15 21 18.25 21 13V7L12 2z"
               fill="url(#sg)" />
-            <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <defs>
               <linearGradient id="sg" x1="3" y1="2" x2="21" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#00d4ff"/>
-                <stop offset="1" stopColor="#0066cc"/>
+                <stop stopColor="#00d4ff" />
+                <stop offset="1" stopColor="#0066cc" />
               </linearGradient>
             </defs>
           </svg>

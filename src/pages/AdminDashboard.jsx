@@ -54,6 +54,10 @@ export default function AdminDashboard() {
     return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
+  const adminNameRaw = sessionStorage.getItem('adminName') || 'Admin';
+  // Extract just the name part before the '@' if they used an email-like username
+  const adminName = adminNameRaw.split('@')[0];
+
   return (
     <div style={styles.page}>
       <div style={styles.grid}></div>
@@ -69,7 +73,7 @@ export default function AdminDashboard() {
               </linearGradient>
             </defs>
           </svg>
-          <span style={styles.topTitle}>Admin Dashboard</span>
+          <span style={styles.topTitle}>Welcome, {adminName}</span>
           <span style={styles.badge}>RESTRICTED</span>
         </div>
         <button onClick={handleLogout} style={styles.logoutBtn}
