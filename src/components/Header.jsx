@@ -36,14 +36,17 @@ const Header = () => {
       <nav className="mx-auto max-w-7xl h-full px-6 lg:px-8 flex items-center justify-between">
         
         {/* Brand */}
-        <Link className="flex items-center gap-2 sm:gap-3 relative z-50 max-w-[70%]" to="/">
-          <img src="/assets/img/mark.png" alt="Logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain shrink-0" />
-          <span className="font-bold text-xs sm:text-[1.1rem] text-ink tracking-tight truncate">HIGH IN SKY SOLUTIONS</span>
+        <Link className="group flex items-center gap-2 sm:gap-3 relative z-50 max-w-[70%]" to="/">
+          <span className="relative shrink-0">
+            <span className="absolute inset-0 rounded-full bg-brand/25 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+            <img src="/assets/img/mark.png" alt="Logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain relative z-10 transition-transform duration-500 ease-premium group-hover:scale-110 group-hover:rotate-3" />
+          </span>
+          <span className="font-bold text-xs sm:text-[1.1rem] text-ink tracking-[-0.02em] truncate transition-colors duration-300 group-hover:text-brand-light">HIGH IN SKY SOLUTIONS</span>
         </Link>
         
         {/* Mobile Toggle Button */}
         <button 
-          className="lg:hidden relative z-50 p-2 -mr-2 text-ink hover:text-brand transition-colors focus:outline-none"
+          className="lg:hidden relative z-50 p-2.5 -mr-2 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md text-ink hover:text-brand hover:border-brand/40 transition-all duration-300 ease-premium active:scale-95 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle navigation"
         >
@@ -60,7 +63,7 @@ const Header = () => {
             <NavLink 
               key={link.name}
               to={link.path}
-              className={({isActive}) => `nav-link ${isActive ? 'active drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]' : ''}`}
+              className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}
             >
               {link.name}
             </NavLink>
@@ -71,15 +74,18 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-4 relative z-50">
           {currentUser ? (
             <>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface border border-line shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse shadow-glow"></span>
-                <span className="text-ink text-xs font-semibold max-w-[100px] truncate">
+              <div className="badge-pill normal-case">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-brand opacity-70 animate-ping"></span>
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand shadow-glow"></span>
+                </span>
+                <span className="text-ink text-xs font-semibold max-w-[100px] truncate tracking-normal">
                   {currentUser.name}
                 </span>
               </div>
-              <button 
-                onClick={logout} 
-                className="text-xs font-semibold uppercase tracking-wider text-muted hover:text-brand transition-colors cursor-pointer focus:outline-none"
+              <button
+                onClick={logout}
+                className="text-xs font-semibold uppercase tracking-wider text-muted hover:text-brand transition-all duration-300 ease-premium hover:-translate-y-0.5 cursor-pointer focus:outline-none"
               >
                 Sign Out
               </button>
@@ -101,27 +107,41 @@ const Header = () => {
 
         {/* Mobile Navigation Drawer */}
         <div 
-          className={`lg:hidden fixed inset-0 z-40 bg-paper transition-transform duration-300 ease-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`lg:hidden fixed inset-0 z-40 transition-transform duration-500 ease-premium ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          style={{
+            backgroundColor: 'rgba(10, 10, 10, 0.92)',
+            backdropFilter: 'blur(28px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+          }}
         >
-          <div className="flex flex-col h-full pt-24 px-6 pb-8 overflow-y-auto">
+          {/* Ambient glows for depth */}
+          <div className="glow-orb top-[-80px] right-[-80px] w-[320px] h-[320px] bg-brand/20"></div>
+          <div className="glow-orb bottom-[-60px] left-[-80px] w-[280px] h-[280px] bg-accent/15"></div>
+
+          <div className="relative z-10 flex flex-col h-full pt-24 px-6 pb-8 overflow-y-auto">
             <div className="flex flex-col gap-2 mb-8">
-              {navLinks.map((link) => (
-                <NavLink 
+              {navLinks.map((link, i) => (
+                <NavLink
                   key={link.name}
                   to={link.path}
+                  style={{ transitionDelay: isMobileMenuOpen ? `${120 + i * 60}ms` : '0ms' }}
                   className={({isActive}) => `
-                    text-xl font-bold py-3 transition-colors duration-200 border-b border-line/40
-                    ${isActive ? 'text-brand drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]' : 'text-ink'}
+                    group flex items-center justify-between text-xl font-bold py-3.5
+                    border-b border-white/[0.07]
+                    transition-all duration-500 ease-premium
+                    ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'}
+                    ${isActive ? 'text-brand' : 'text-ink hover:text-brand-light hover:pl-1.5'}
                   `}
                 >
                   {link.name}
+                  <i className="bi bi-arrow-right-short text-brand text-2xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-premium"></i>
                 </NavLink>
               ))}
             </div>
             
             <div className="mt-auto pt-8 flex flex-col gap-4">
               {currentUser ? (
-                <div className="flex items-center justify-between p-4 rounded-xl bg-surface border border-line">
+                <div className="glass-panel flex items-center justify-between p-4 rounded-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-brand animate-pulse shadow-glow"></span>
                     <span className="text-ink font-semibold text-sm truncate max-w-[180px]">

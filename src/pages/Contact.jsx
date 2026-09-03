@@ -45,10 +45,12 @@ const Contact = () => {
     <div className="bg-paper">
       
       {/* Minimal Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-line bg-surface relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand/5 rounded-full blur-[120px] pointer-events-none animate-blob"></div>
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-white/[0.06] bg-surface/40 relative overflow-hidden">
+        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand/[0.09] animate-blob"></div>
+        <div className="glow-orb bottom-[-100px] right-[8%] w-[340px] h-[340px] bg-accent/[0.08] animate-blob-slow"></div>
         <div className="container mx-auto px-6 max-w-7xl text-center relative z-10" data-aos="fade-up">
-          <h1 className="mb-6">Contact Engineering</h1>
+          <div className="eyebrow mb-4">Get In Touch</div>
+          <h1 className="mb-6">Contact <span className="text-gradient">Engineering</span></h1>
           <p className="text-lg text-muted max-w-2xl mx-auto">
             Direct line to our technical team. Submit your project requirements and we will return a comprehensive technical evaluation.
           </p>
@@ -56,16 +58,17 @@ const Contact = () => {
       </section>
 
       {/* Form Section */}
-      <section className="py-24 border-b border-line bg-paper">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="py-24 border-b border-white/[0.06] bg-paper relative overflow-hidden">
+        <div className="glow-orb top-[10%] left-[-8%] w-[380px] h-[380px] bg-accent/[0.06]"></div>
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
-            
+
             <div className="lg:col-span-4" data-aos="fade-right">
-              <h3 className="mb-6 text-brand drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">Direct Contact</h3>
-              
+              <h3 className="mb-6">Direct <span className="text-gradient">Contact</span></h3>
+
               <div className="flex flex-col gap-6">
                 <a href="mailto:highinskysolution@gmail.com" className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-lg bg-surface border border-line text-brand flex items-center justify-center text-xl transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand group-hover:shadow-glow">
+                  <div className="icon-tile w-12 h-12 text-xl shrink-0 group-hover:bg-gradient-brand group-hover:text-[#04141a] group-hover:border-brand">
                     <i className="bi bi-envelope"></i>
                   </div>
                   <div>
@@ -73,9 +76,9 @@ const Contact = () => {
                     <div className="text-sm text-muted">highinskysolution@gmail.com</div>
                   </div>
                 </a>
-                
+
                 <a href="tel:+918080273949" className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-lg bg-surface border border-line text-brand flex items-center justify-center text-xl transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand group-hover:shadow-glow">
+                  <div className="icon-tile w-12 h-12 text-xl shrink-0 group-hover:bg-gradient-brand group-hover:text-[#04141a] group-hover:border-brand">
                     <i className="bi bi-telephone"></i>
                   </div>
                   <div>
@@ -83,9 +86,9 @@ const Contact = () => {
                     <div className="text-sm text-muted">+91 80802 73949</div>
                   </div>
                 </a>
-                
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-surface border border-line text-brand flex items-center justify-center text-xl shadow-glow">
+
+                <div className="flex items-center gap-4 group">
+                  <div className="icon-tile w-12 h-12 text-xl shrink-0 shadow-glow">
                     <i className="bi bi-geo-alt"></i>
                   </div>
                   <div>
@@ -95,13 +98,13 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="lg:col-span-8" data-aos="fade-left">
-              <div className="bg-surface border border-line rounded-2xl p-8 lg:p-10 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-brand/5 rounded-full blur-[80px] pointer-events-none"></div>
-                
-                <div className="mb-8 pb-6 border-b border-line relative z-10">
-                  <h3 className="mb-2">Request an Evaluation</h3>
+              <div className="glass-panel p-8 lg:p-10 overflow-hidden">
+                <div className="glow-orb top-[-40px] right-[-40px] w-56 h-56 bg-brand/[0.1]"></div>
+
+                <div className="mb-8 pb-6 border-b border-white/[0.07] relative z-10">
+                  <h3 className="mb-2">Request an <span className="text-gradient">Evaluation</span></h3>
                   <p className="text-sm text-muted">Please provide as much technical detail as possible.</p>
                 </div>
                 
@@ -113,19 +116,19 @@ const Contact = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div>
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="name">Full Name</label>
-                      <input className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/50" id="name" name="name" type="text" required />
+                      <input className="field-input" id="name" name="name" type="text" required />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="email">Email Address</label>
-                      <input className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/50" id="email" name="email" type="email" required />
+                      <input className="field-input" id="email" name="email" type="email" required />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="phone">Phone Number</label>
-                      <input className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/50" id="phone" name="phone" type="tel" maxLength="10" pattern="[0-9]{10}" value={phone} onChange={handlePhoneChange} />
+                      <input className="field-input" id="phone" name="phone" type="tel" maxLength="10" pattern="[0-9]{10}" value={phone} onChange={handlePhoneChange} />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="budget">Estimated Budget</label>
-                      <select className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all appearance-none cursor-pointer" id="budget" name="budget" defaultValue="Need guidance">
+                      <select className="field-input appearance-none cursor-pointer" id="budget" name="budget" defaultValue="Need guidance">
                         <option className="bg-surface text-ink">Need guidance</option>
                         <option className="bg-surface text-ink">Basic website</option>
                         <option className="bg-surface text-ink">Business website</option>
@@ -134,7 +137,7 @@ const Contact = () => {
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="service">Primary Service Required</label>
-                      <select className="w-full px-4 py-2.5 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all appearance-none cursor-pointer" id="service" name="service" value={serviceOption} onChange={(e) => setServiceOption(e.target.value)}>
+                      <select className="field-input appearance-none cursor-pointer" id="service" name="service" value={serviceOption} onChange={(e) => setServiceOption(e.target.value)}>
                         <option className="bg-surface text-ink">Website Design</option>
                         <option className="bg-surface text-ink">Software Development</option>
                         <option className="bg-surface text-ink">App Development</option>
@@ -147,7 +150,7 @@ const Contact = () => {
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-xs font-semibold text-ink mb-2" htmlFor="message">Technical Requirements</label>
-                      <textarea className="w-full px-4 py-3 rounded-lg border border-line bg-paper text-ink text-sm focus:bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all resize-y min-h-[120px] placeholder-muted/50" id="message" name="message" required></textarea>
+                      <textarea className="field-input resize-y min-h-[120px]" id="message" name="message" required></textarea>
                     </div>
                   </div>
                   
@@ -167,22 +170,24 @@ const Contact = () => {
       </section>
 
       {/* Minimal FAQ Section */}
-      <section className="py-24 bg-surface">
-        <div className="container mx-auto px-6 max-w-3xl">
+      <section className="py-24 lg:py-32 bg-surface/40 relative overflow-hidden">
+        <div className="glow-orb bottom-[5%] right-[-8%] w-[400px] h-[400px] bg-brand/[0.07]"></div>
+        <div className="container mx-auto px-6 max-w-3xl relative z-10">
           <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="mb-4 text-brand drop-shadow-[0_0_15px_rgba(6,182,212,0.3)]">Frequently Asked Questions</h2>
+            <div className="eyebrow mb-4">Support</div>
+            <h2 className="mb-4">Frequently Asked <span className="text-gradient">Questions</span></h2>
             <p className="text-muted text-lg">Standard policies and procedures.</p>
           </div>
-          
+
           <div className="flex flex-col gap-4" data-aos="fade-up">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-paper border border-line rounded-lg overflow-hidden transition-all duration-200">
-                <button 
+              <div key={index} className={`glass-panel overflow-hidden transition-all duration-300 ease-premium ${openFaq === index ? 'border-brand/30 shadow-glow' : ''}`}>
+                <button
                   className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none"
                   onClick={() => toggleFaq(index)}
                 >
                   <span className={`text-sm font-semibold transition-colors ${openFaq === index ? 'text-brand' : 'text-ink'}`}>{faq.q}</span>
-                  <i className={`bi bi-chevron-down transition-transform duration-200 ${openFaq === index ? 'rotate-180 text-brand' : 'text-muted'}`}></i>
+                  <i className={`bi bi-chevron-down transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-brand' : 'text-muted'}`}></i>
                 </button>
                 <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="px-6 pb-5 pt-0 text-muted text-sm leading-relaxed">

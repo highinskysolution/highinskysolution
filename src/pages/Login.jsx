@@ -35,18 +35,20 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-paper flex items-center justify-center pt-20 sm:pt-28 pb-8 sm:pb-16 px-4 relative overflow-hidden">
       {/* Background Ambient Glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="glow-orb top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand/[0.1] animate-blob"></div>
+      <div className="glow-orb bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.08] animate-blob-slow"></div>
+      <div className="grid-overlay opacity-40"></div>
 
       <div className="w-full max-w-md relative z-10" data-aos="fade-up">
-        <div className="bg-surface border border-line rounded-2xl p-6 sm:p-8 shadow-card relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-brand/5 rounded-full blur-[60px] pointer-events-none"></div>
-          
-          <div className="text-center mb-8">
-            <Link to="/" className="inline-flex items-center gap-2 mb-4">
-              <img src="/assets/img/mark.png" alt="Logo" className="w-8 h-8 object-contain" />
+        <div className="glass-panel p-6 sm:p-8 overflow-hidden">
+          <div className="glow-orb top-[-40px] right-[-40px] w-40 h-40 bg-brand/[0.12]"></div>
+
+          <div className="text-center mb-8 relative z-10">
+            <Link to="/" className="group inline-flex items-center gap-2 mb-4 relative">
+              <span className="absolute inset-0 -m-3 rounded-full bg-brand/25 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+              <img src="/assets/img/mark.png" alt="Logo" className="w-9 h-9 object-contain relative z-10 transition-transform duration-500 ease-premium group-hover:scale-110" />
             </Link>
-            <h2 className="text-2xl font-bold mb-2">Access Control</h2>
+            <h2 className="text-2xl font-bold mb-2">Access <span className="text-gradient">Control</span></h2>
             <p className="text-sm text-muted">Sign in to your client console.</p>
           </div>
 
@@ -57,13 +59,13 @@ const Login = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
+          <form onSubmit={handleSubmit} className="space-y-6 relative z-10" autoComplete="off">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-muted mb-2" htmlFor="email">
                 Email Address
               </label>
               <input
-                className="w-full px-4 py-3 rounded-lg border border-line bg-paper text-ink text-sm focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/30"
+                className="field-input"
                 id="email"
                 type="email"
                 placeholder="example@gmail.com"
@@ -80,7 +82,7 @@ const Login = () => {
               </label>
               <div className="relative">
                 <input
-                  className="w-full px-4 py-3 pr-10 rounded-lg border border-line bg-paper text-ink text-sm focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all placeholder-muted/30"
+                  className="field-input pr-10"
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
@@ -108,7 +110,7 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-line text-center text-sm text-muted">
+          <div className="mt-8 pt-6 border-t border-white/[0.07] text-center text-sm text-muted relative z-10">
             New client?{' '}
             <Link to="/signup" className="text-brand hover:text-brand-light font-medium transition-colors">
               Create an account

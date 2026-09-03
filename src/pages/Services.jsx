@@ -73,9 +73,12 @@ const Services = () => {
     <div className="bg-paper">
       
       {/* Minimal Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-line bg-surface">
-        <div className="container mx-auto px-6 max-w-7xl text-center" data-aos="fade-up">
-          <h1 className="mb-6 text-brand drop-shadow-[0_0_15px_rgba(6,182,212,0.3)]">Capabilities & Expertise</h1>
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-white/[0.06] bg-surface/40 relative overflow-hidden">
+        <div className="glow-orb top-[-120px] right-[-60px] w-[460px] h-[460px] bg-brand/[0.12] animate-blob"></div>
+        <div className="glow-orb bottom-[-120px] left-[-60px] w-[380px] h-[380px] bg-accent/[0.09] animate-blob-slow"></div>
+        <div className="container mx-auto px-6 max-w-7xl text-center relative z-10" data-aos="fade-up">
+          <div className="eyebrow mb-4">What We Offer</div>
+          <h1 className="mb-6">Capabilities & <span className="text-gradient">Expertise</span></h1>
           <p className="text-lg text-muted max-w-2xl mx-auto mb-12">
             A comprehensive suite of engineering services. From beautiful user interfaces to robust cloud architectures and intelligent automation.
           </p>
@@ -83,25 +86,25 @@ const Services = () => {
           {/* Simple Filter Tabs */}
           <div className="inline-flex flex-wrap justify-center gap-2">
             <button 
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeFilter === 'all' ? 'bg-brand text-[#0a0a0a] shadow-glow' : 'bg-paper border border-line text-ink hover:bg-zinc-800'}`} 
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ease-premium ${activeFilter === 'all' ? 'bg-gradient-brand text-[#04141a] shadow-glow-btn -translate-y-0.5' : 'bg-white/[0.04] border border-white/10 text-muted hover:text-brand hover:border-brand/40 hover:-translate-y-0.5'}`} 
               onClick={() => handleFilterClick('all')}
             >
               All Solutions
             </button>
             <button 
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeFilter === 'dev' ? 'bg-brand text-[#0a0a0a] shadow-glow' : 'bg-paper border border-line text-ink hover:bg-zinc-800'}`} 
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ease-premium ${activeFilter === 'dev' ? 'bg-gradient-brand text-[#04141a] shadow-glow-btn -translate-y-0.5' : 'bg-white/[0.04] border border-white/10 text-muted hover:text-brand hover:border-brand/40 hover:-translate-y-0.5'}`} 
               onClick={() => handleFilterClick('dev')}
             >
               Development
             </button>
             <button 
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeFilter === 'business' ? 'bg-brand text-[#0a0a0a] shadow-glow' : 'bg-paper border border-line text-ink hover:bg-zinc-800'}`} 
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ease-premium ${activeFilter === 'business' ? 'bg-gradient-brand text-[#04141a] shadow-glow-btn -translate-y-0.5' : 'bg-white/[0.04] border border-white/10 text-muted hover:text-brand hover:border-brand/40 hover:-translate-y-0.5'}`} 
               onClick={() => handleFilterClick('business')}
             >
               Enterprise
             </button>
             <button 
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${activeFilter === 'ai' ? 'bg-brand text-[#0a0a0a] shadow-glow' : 'bg-paper border border-line text-ink hover:bg-zinc-800'}`} 
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ease-premium ${activeFilter === 'ai' ? 'bg-gradient-brand text-[#04141a] shadow-glow-btn -translate-y-0.5' : 'bg-white/[0.04] border border-white/10 text-muted hover:text-brand hover:border-brand/40 hover:-translate-y-0.5'}`} 
               onClick={() => handleFilterClick('ai')}
             >
               AI & Automation
@@ -111,31 +114,35 @@ const Services = () => {
       </section>
 
       {/* Services Grid - Clean Enterprise Cards */}
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="py-24 lg:py-32 relative overflow-hidden">
+        <div className="glow-orb top-[20%] left-[-10%] w-[400px] h-[400px] bg-accent/[0.06]"></div>
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredServices.map((service, index) => (
-              <div 
-                key={service.id} 
-                className="enterprise-card h-full flex flex-col overflow-hidden group bg-surface"
-                data-aos="fade-up" 
+              <div
+                key={service.id}
+                className="enterprise-card h-full flex flex-col overflow-hidden group bg-surface/50"
+                data-aos="fade-up"
                 data-aos-delay={index * 50}
               >
                 {/* Photo Header */}
-                <div className="h-[180px] w-full bg-paper border-b border-line overflow-hidden relative">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="h-[180px] w-full border-b border-white/[0.07] overflow-hidden relative">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-[900ms] ease-premium group-hover:scale-[1.08]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"></div>
                 </div>
-                
+
                 {/* Content Area */}
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="flex items-center gap-3 mb-4">
-                    <i className={`bi ${service.icon} text-brand text-xl drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]`}></i>
+                    <span className="icon-tile w-11 h-11 text-lg shrink-0 group-hover:bg-gradient-brand group-hover:text-[#04141a] group-hover:border-brand">
+                      <i className={`bi ${service.icon}`}></i>
+                    </span>
                     <h3 className="text-lg mb-0">{service.title}</h3>
                   </div>
-                  
+
                   <p className="text-sm leading-relaxed flex-grow mb-6">{service.desc}</p>
-                  
-                  <div className="pt-4 border-t border-line">
+
+                  <div className="pt-4 border-t border-white/[0.07]">
                     <ul className="flex flex-col gap-2">
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-center gap-2 text-xs font-semibold text-ink">
@@ -153,14 +160,16 @@ const Services = () => {
       </section>
 
       {/* Minimal CTA */}
-      <section className="py-24 bg-surface border-t border-line text-center">
-        <div className="container mx-auto px-6 max-w-3xl" data-aos="fade-up">
-          <h2 className="mb-6">Need a custom stack?</h2>
+      <section className="py-24 lg:py-32 bg-surface/40 border-t border-white/[0.06] text-center relative overflow-hidden">
+        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-brand/[0.08] animate-glow-pulse"></div>
+        <div className="container mx-auto px-6 max-w-3xl relative z-10" data-aos="fade-up">
+          <h2 className="mb-6">Need a <span className="text-gradient">custom stack?</span></h2>
           <p className="text-lg text-muted mb-10">
             Don't see exactly what you need? We provide bespoke software architecture tailored precisely to your operational requirements.
           </p>
-          <Link className="btn btn-brand btn-lg" to="/contact">
+          <Link className="btn btn-brand btn-lg group" to="/contact">
             Discuss Custom Solutions
+            <i className="bi bi-arrow-right transition-transform duration-300 ease-premium group-hover:translate-x-1"></i>
           </Link>
         </div>
       </section>
