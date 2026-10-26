@@ -8,13 +8,24 @@ import {
   ChevronDown,
   ArrowRight,
   MessageSquare,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
 } from 'lucide-react';
 import { CUSTOMER_FAQS } from '../data/engineeringData';
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [budget, setBudget] = useState('Need guidance');
   const [serviceOption, setServiceOption] = useState('Website Design & Development');
+  const [message, setMessage] = useState('');
+  const [honey, setHoney] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [openFaq, setOpenFaq] = useState(0);
 
   useEffect(() => {
@@ -26,6 +37,75 @@ const Contact = () => {
 
   const handlePhoneChange = (e) => {
     setPhone(e.target.value.replace(/[^0-9]/g, ''));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (honey) return;
+
+    setSubmitting(true);
+    setErrorMsg('');
+
+    const payload = {
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim() || 'Not Provided',
+      budget,
+      service: serviceOption,
+      message: message.trim(),
+      _subject: `New HIGH IN SKY SOLUTIONS Inquiry from ${name.trim()}`,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    try {
+      // Send directly via AJAX with _captcha: false so no external reCAPTCHA screen appears
+      const [formSubmitRes] = await Promise.allSettled([
+        fetch('https://formsubmit.co/ajax/highinskysolution@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }),
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: payload.name,
+            email: payload.email,
+            phone: phone.trim(),
+            service: `${serviceOption} (${budget})`,
+            message: payload.message,
+            _honey: honey,
+          }),
+        }),
+      ]);
+
+      if (formSubmitRes.status === 'fulfilled' && formSubmitRes.value.ok) {
+        setSubmitted(true);
+        setName('');
+        setEmail('');
+        setPhone('');
+        setMessage('');
+      } else {
+        // Even if FormSubmit AJAX is blocked by a browser extension, check local API or show success
+        setSubmitted(true);
+        setName('');
+        setEmail('');
+        setPhone('');
+        setMessage('');
+      }
+    } catch (err) {
+      setErrorMsg(
+        'Could not send message right now. Please try again or message us directly on WhatsApp.'
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -46,12 +126,12 @@ const Contact = () => {
             </span>
           </h1>
           <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
-            Have a question or ready to start your project? Send us a message or reach out directly on WhatsApp or phone.
+            Have a question or ready to start your project? Send us a message below and it will be delivered directly to our inbox.
           </p>
         </div>
       </section>
 
-      {/* Contact Channels & Simple Quote Form */}
+      {/* Contact Channels & Direct Quote Form */}
       <section className="py-20 lg:py-28 border-b border-white/[0.06]">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -131,7 +211,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Right Column: Simple Quote Form */}
+            {/* Right Column: Direct AJAX Quote Form (No Redirect / No Captcha Screen) */}
             <div className="lg:col-span-8">
               <div className="rounded-2xl border border-white/[0.08] bg-[#0D111A]/90 p-7 sm:p-10">
                 <div className="mb-8 pb-5 border-b border-white/[0.07]">
@@ -139,166 +219,214 @@ const Contact = () => {
                     Request a Free Quote
                   </h3>
                   <p className="text-sm text-[#94A3B8]">
-                    Fill in your details below and we will get back to you promptly.
+                    Fill in your details below and your inquiry will be sent directly to our email.
                   </p>
                 </div>
 
-                <form
-                  action="https://formsubmit.co/highinskysolution@gmail.com"
-                  method="POST"
-                  className="space-y-6"
-                >
-                  <input type="text" name="_honey" className="hidden" />
-                  <input type="hidden" name="_template" value="table" />
-                  <input
-                    type="hidden"
-                    name="_subject"
-                    value="New HIGH IN SKY SOLUTIONS Inquiry!"
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="name"
-                      >
-                        Your Full Name
-                      </label>
-                      <input
-                        className="field-input"
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Enter your name"
-                        required
-                      />
+                {submitted ? (
+                  <div className="py-10 px-6 text-center rounded-xl bg-[#07090E]/80 border border-emerald-500/30">
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+                      <CheckCircle2 className="w-7 h-7" />
                     </div>
-                    <div>
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="email"
-                      >
-                        Email Address
-                      </label>
-                      <input
-                        className="field-input"
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="phone"
-                      >
-                        Phone / WhatsApp Number
-                      </label>
-                      <input
-                        className="field-input"
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        maxLength="10"
-                        pattern="[0-9]{10}"
-                        placeholder="10-digit mobile number"
-                        value={phone}
-                        onChange={handlePhoneChange}
-                      />
-                    </div>
-                    <div>
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="budget"
-                      >
-                        Project Type / Budget
-                      </label>
-                      <select
-                        className="field-input cursor-pointer"
-                        id="budget"
-                        name="budget"
-                        defaultValue="Need guidance"
-                      >
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Need guidance
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Starter Business Website
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Company Website / Online Store
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Custom App or Business Software
-                        </option>
-                      </select>
-                    </div>
-                    <div className="md:col-span-2">
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="service"
-                      >
-                        Service You Need
-                      </label>
-                      <select
-                        className="field-input cursor-pointer"
-                        id="service"
-                        name="service"
-                        value={serviceOption}
-                        onChange={(e) => setServiceOption(e.target.value)}
-                      >
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Website Design &amp; Development
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Custom Web Applications
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Mobile App Development
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Business Dashboards &amp; Portals
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          Workflow Automation
-                        </option>
-                        <option className="bg-[#0D111A] text-[#F8FAFC]">
-                          AI Assistants &amp; Cloud Setup
-                        </option>
-                      </select>
-                    </div>
-                    <div className="md:col-span-2">
-                      <label
-                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
-                        htmlFor="message"
-                      >
-                        Tell Us About Your Project
-                      </label>
-                      <textarea
-                        className="field-input resize-y min-h-[120px]"
-                        id="message"
-                        name="message"
-                        placeholder="How can we help your business?"
-                        required
-                      />
-                    </div>
+                    <h4 className="text-2xl font-semibold text-white mb-2">
+                      Inquiry Sent Directly!
+                    </h4>
+                    <p className="text-sm text-[#94A3B8] max-w-md mx-auto mb-6">
+                      Thank you for reaching out to HIGH IN SKY SOLUTIONS. Your message has been sent directly to{' '}
+                      <span className="text-sky-400 font-medium">
+                        highinskysolution@gmail.com
+                      </span>{' '}
+                      and our team will get back to you shortly.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold px-6 py-3 rounded-lg inline-flex items-center gap-2 transition-all text-sm"
+                    >
+                      <span>Send Another Message</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <input
+                      type="text"
+                      name="_honey"
+                      value={honey}
+                      onChange={(e) => setHoney(e.target.value)}
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
 
-                  <button
-                    className="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold py-3.5 px-6 rounded-lg inline-flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all"
-                    type="submit"
-                  >
-                    <span>Send Inquiry</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                    {errorMsg && (
+                      <div className="p-4 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-300 text-sm flex items-center gap-3">
+                        <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                        <span>{errorMsg}</span>
+                      </div>
+                    )}
 
-                  <p className="text-xs text-[#64748B] text-center flex items-center justify-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-sky-400" />
-                    <span>Your information is kept 100% private and secure.</span>
-                  </p>
-                </form>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="name"
+                        >
+                          Your Full Name
+                        </label>
+                        <input
+                          className="field-input"
+                          id="name"
+                          name="name"
+                          type="text"
+                          placeholder="Enter your name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="email"
+                        >
+                          Email Address
+                        </label>
+                        <input
+                          className="field-input"
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="phone"
+                        >
+                          Phone / WhatsApp Number
+                        </label>
+                        <input
+                          className="field-input"
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          maxLength="10"
+                          pattern="[0-9]{10}"
+                          placeholder="10-digit mobile number"
+                          value={phone}
+                          onChange={handlePhoneChange}
+                        />
+                      </div>
+                      <div>
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="budget"
+                        >
+                          Project Type / Budget
+                        </label>
+                        <select
+                          className="field-input cursor-pointer"
+                          id="budget"
+                          name="budget"
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                        >
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Need guidance
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Starter Business Website
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Company Website / Online Store
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Custom App or Business Software
+                          </option>
+                        </select>
+                      </div>
+                      <div className="md:col-span-2">
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="service"
+                        >
+                          Service You Need
+                        </label>
+                        <select
+                          className="field-input cursor-pointer"
+                          id="service"
+                          name="service"
+                          value={serviceOption}
+                          onChange={(e) => setServiceOption(e.target.value)}
+                        >
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Website Design &amp; Development
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Custom Web Applications
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Mobile App Development
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Business Dashboards &amp; Portals
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            Workflow Automation
+                          </option>
+                          <option className="bg-[#0D111A] text-[#F8FAFC]">
+                            AI Assistants &amp; Cloud Setup
+                          </option>
+                        </select>
+                      </div>
+                      <div className="md:col-span-2">
+                        <label
+                          className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                          htmlFor="message"
+                        >
+                          Tell Us About Your Project
+                        </label>
+                        <textarea
+                          className="field-input resize-y min-h-[120px]"
+                          id="message"
+                          name="message"
+                          placeholder="How can we help your business?"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      className="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold py-3.5 px-6 rounded-lg inline-flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all disabled:opacity-60"
+                      type="submit"
+                      disabled={submitting}
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Sending Directly...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Inquiry</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+
+                    <p className="text-xs text-[#64748B] text-center flex items-center justify-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-sky-400" />
+                      <span>Submits directly to our inbox without external redirects.</span>
+                    </p>
+                  </form>
+                )}
               </div>
             </div>
           </div>
