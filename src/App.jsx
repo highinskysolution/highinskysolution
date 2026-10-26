@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Preloader from './components/Preloader';
 import { AuthProvider } from './context/AuthContext';
 
 import Home from './pages/Home';
@@ -30,6 +31,7 @@ function App() {
       <AuthProvider>
         <div className="min-h-screen flex flex-col bg-[#07090E] text-[#F8FAFC] selection:bg-sky-400/25 selection:text-sky-200">
           <ScrollToTop />
+          <Preloader />
           <Header />
           <main className="flex-grow">
             <Routes>
