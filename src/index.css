@@ -3,367 +3,184 @@
 @tailwind utilities;
 
 /* ============================================================
-   BASE
+   BASE — INSTITUTIONAL DARK MODE (#07090E)
    ============================================================ */
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #0a0a0a;
+    background-color: #07090E;
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased selection:bg-brand/30 selection:text-brand-light;
+    @apply bg-[#07090E] text-[#F8FAFC] font-sans antialiased selection:bg-sky-400/25 selection:text-sky-200;
     overflow-x: hidden;
-    /* Subtle layered ambient field so flat sections never look dead */
-    background-image:
-      radial-gradient(900px circle at 12% -5%, rgba(6, 182, 212, 0.07), transparent 60%),
-      radial-gradient(700px circle at 88% 8%, rgba(99, 102, 241, 0.055), transparent 60%);
+    background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(56, 189, 248, 0.12), transparent 70%);
     background-attachment: fixed;
     background-repeat: no-repeat;
     text-rendering: optimizeLegibility;
   }
 
-  /* Fluid, sharp typography — tighter tracking reads more premium */
   h1 {
-    @apply text-[clamp(2.35rem,4.4vw,3.85rem)] leading-[1.06] tracking-[-0.03em] font-extrabold text-ink;
+    @apply text-4xl sm:text-6xl leading-[1.08] tracking-tight font-semibold text-[#F8FAFC];
+    text-wrap: balance;
   }
   h2 {
-    @apply text-[clamp(1.85rem,3.1vw,2.7rem)] leading-[1.15] tracking-[-0.025em] font-bold text-ink;
+    @apply text-3xl sm:text-4xl leading-[1.15] tracking-tight font-semibold text-[#F8FAFC];
+    text-wrap: balance;
   }
   h3 {
-    @apply text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] tracking-[-0.015em] font-semibold text-ink;
+    @apply text-lg sm:text-xl leading-[1.3] tracking-tight font-semibold text-[#F8FAFC];
   }
   p {
-    @apply text-muted leading-relaxed;
+    @apply text-[#94A3B8] leading-relaxed;
   }
 
-  /* Premium focus ring — accessible, on-brand, never ugly */
   :focus-visible {
-    outline: 2px solid rgba(6, 182, 212, 0.7);
-    outline-offset: 3px;
+    outline: 2px solid #38BDF8;
+    outline-offset: 2px;
     border-radius: 6px;
   }
 
-  /* Refined scrollbar */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-track { background: #07090E; }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #27272a, #3f3f46);
+    background: #1E293B;
     border-radius: 999px;
-    border: 2px solid #0a0a0a;
+    border: 2px solid #07090E;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0891b2, #06b6d4);
+    background: #38BDF8;
   }
 }
 
 /* ============================================================
-   COMPONENTS
+   ARCHITECTURAL ATMOSPHERE & COMPONENTS
    ============================================================ */
 @layer components {
+  /* Architectural 4rem x 4rem structural grid with radial fade mask */
+  .arch-grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    mask-image: radial-gradient(ellipse 80% 65% at 50% 25%, #000 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 25%, #000 35%, transparent 100%);
+  }
 
-  /* ---------- Glassmorphic Navigation ---------- */
+  .top-spotlight {
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(56, 189, 248, 0.12), transparent);
+  }
+
+  /* ---------- Sticky Glassmorphic Navigation ---------- */
   .enterprise-nav {
-    @apply h-[70px] border-b border-white/[0.06] transition-all duration-500 ease-premium;
-    background-color: rgba(10, 10, 10, 0.55);
+    @apply h-20 border-b border-white/[0.07] transition-colors duration-200;
+    background-color: rgba(7, 9, 14, 0.80);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
 
   .enterprise-nav.nav-scrolled {
-    @apply shadow-nav border-white/[0.09];
-    background-color: rgba(8, 8, 10, 0.82);
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    @apply border-white/[0.1] shadow-nav;
+    background-color: rgba(7, 9, 14, 0.92);
   }
 
-  /* Hairline gradient glow under the nav */
-  .enterprise-nav::after {
-    content: "";
-    @apply absolute left-0 bottom-0 w-full h-px opacity-0 transition-opacity duration-500;
-    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.55), rgba(99, 102, 241, 0.4), transparent);
-  }
-  .enterprise-nav.nav-scrolled::after {
-    @apply opacity-100;
-  }
-
-  /* ---------- Nav links with animated underline ---------- */
-  .nav-link {
-    @apply relative text-muted text-sm font-medium transition-all duration-300 ease-premium hover:text-white;
-  }
-
-  .nav-link::after {
-    content: "";
-    @apply absolute -bottom-1.5 left-0 h-[2px] w-0 rounded-full transition-all duration-300 ease-premium;
-    background: linear-gradient(90deg, #06b6d4, #67e8f9);
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
-  }
-
-  .nav-link:hover::after { @apply w-full; }
-
-  .nav-link.active {
-    @apply text-brand font-semibold;
-  }
-  .nav-link.active::after { @apply w-full; }
-
-  /* ---------- Premium Buttons ---------- */
+  /* ---------- Buttons ---------- */
   .btn {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold
-           tracking-[-0.01em] cursor-pointer overflow-hidden
-           transition-all duration-300 ease-premium
-           active:scale-[0.97] active:duration-100;
-  }
-
-  /* Sheen sweep that runs across buttons on hover */
-  .btn::before {
-    content: "";
-    @apply absolute top-0 left-0 h-full w-1/3 opacity-0 pointer-events-none;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
-    transform: translateX(-120%) skewX(-18deg);
-  }
-  .btn:hover::before {
-    @apply opacity-100;
-    animation: sheen 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold
+           tracking-tight cursor-pointer whitespace-nowrap shrink-0
+           transition-all duration-200
+           focus-visible:ring-2 focus-visible:ring-sky-400
+           active:scale-[0.98];
   }
 
   .btn-brand {
-    @apply text-[#04141a] bg-gradient-brand shadow-glow-btn
-           hover:-translate-y-1 hover:shadow-glow-btn-hover hover:brightness-[1.08];
+    @apply bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold
+           shadow-[0_0_20px_rgba(56,189,248,0.25)] hover:shadow-[0_0_28px_rgba(56,189,248,0.4)];
   }
 
   .btn-secondary {
-    @apply text-white border border-white/10 shadow-sm
-           hover:-translate-y-1 hover:border-brand/45 hover:shadow-glow hover:text-brand-light;
-    background-color: rgba(255, 255, 255, 0.045);
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    @apply bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/[0.1] hover:border-sky-400/30;
   }
 
   .btn-lg {
-    @apply px-8 py-4 text-base rounded-xl;
+    @apply px-6 py-3.5 text-sm sm:text-base rounded-lg;
   }
 
   .btn:disabled {
-    @apply opacity-55 cursor-not-allowed translate-y-0 shadow-none pointer-events-none;
+    @apply opacity-55 cursor-not-allowed pointer-events-none;
   }
 
-  /* ---------- Glass Cards with depth + gradient border on hover ---------- */
+  /* ---------- Layered Charcoal Glass Cards ---------- */
   .enterprise-card {
-    @apply relative rounded-2xl border border-white/[0.07] shadow-card
-           transition-all duration-500 ease-premium
-           hover:-translate-y-2 hover:border-brand/35 hover:shadow-card-hover;
-    background-color: rgba(24, 24, 27, 0.55);
-    backdrop-filter: blur(18px) saturate(165%);
-    -webkit-backdrop-filter: blur(18px) saturate(165%);
+    @apply relative rounded-2xl border border-white/[0.08] bg-[#0D111A]/80 backdrop-blur-md
+           transition-colors duration-300 hover:border-sky-400/30 hover:bg-[#131926]/90;
   }
 
-  /* Inner top-light sheen makes cards read as physical glass */
-  .enterprise-card::before {
-    content: "";
-    @apply absolute inset-0 rounded-2xl pointer-events-none opacity-0 transition-opacity duration-500;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 38%, transparent 70%);
-  }
-  .enterprise-card:hover::before { @apply opacity-100; }
-
-  /* Plain glass panel (non-interactive containers) */
   .glass-panel {
-    @apply relative rounded-2xl border border-white/[0.07] shadow-card;
-    background-color: rgba(24, 24, 27, 0.6);
-    backdrop-filter: blur(20px) saturate(170%);
-    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    @apply relative rounded-2xl border border-white/[0.08] bg-[#0D111A]/80 backdrop-blur-md;
   }
 
   /* ---------- Inputs ---------- */
   .field-input {
-    @apply w-full px-4 py-3 rounded-xl border border-white/10 text-ink text-sm
-           outline-none transition-all duration-300 ease-premium
-           placeholder-muted/40
-           focus:border-brand/70 focus:bg-white/[0.06]
-           focus:shadow-[0_0_0_4px_rgba(6,182,212,0.14)];
-    background-color: rgba(255, 255, 255, 0.035);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    @apply w-full px-4 py-3 rounded-lg border border-white/[0.08] bg-[#07090E]/90 text-[#F8FAFC] text-sm
+           outline-none transition-colors duration-200
+           placeholder-[#64748B]
+           focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/20;
   }
 
-  /* ---------- Pill badge ---------- */
+  /* ---------- Status / Section Labels ---------- */
   .badge-pill {
-    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand/25
-           text-xs font-bold tracking-wide uppercase text-ink
-           transition-all duration-300 ease-premium;
-    background-color: rgba(6, 182, 212, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-400/20
+           bg-sky-500/10 font-mono text-xs tracking-widest uppercase text-sky-400;
   }
 
-  /* ---------- Ticker ---------- */
-  .brand-band {
-    @apply py-5 border-y border-white/[0.06] overflow-hidden w-full relative;
-    background-color: rgba(24, 24, 27, 0.45);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-widest text-sky-400;
   }
 
-  /* Fade the ticker edges so it dissolves instead of clipping */
-  .brand-band::before,
-  .brand-band::after {
-    content: "";
-    @apply absolute top-0 h-full w-24 z-10 pointer-events-none;
-  }
-  .brand-band::before {
-    @apply left-0;
-    background: linear-gradient(90deg, #0a0a0a, transparent);
-  }
-  .brand-band::after {
-    @apply right-0;
-    background: linear-gradient(270deg, #0a0a0a, transparent);
-  }
-
-  .ticker-wrap { @apply flex overflow-hidden w-full; }
-
-  .ticker-track {
-    @apply flex w-max;
-    animation: marquee 40s linear infinite;
-  }
-
-  .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-
-  .ticker-content { @apply flex gap-16 pr-16; }
-
-  .ticker-item {
-    @apply text-muted text-sm font-medium tracking-wide flex items-center gap-6 whitespace-nowrap
-           transition-colors duration-300 hover:text-brand-light;
-  }
-
-  .ticker-item::after {
-    content: "•";
-    @apply text-brand/45 text-lg leading-none;
-  }
-
-  /* ---------- Text gradients ---------- */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-text;
+    @apply bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent;
   }
 
   .text-gradient-accent {
-    @apply bg-clip-text text-transparent bg-gradient-text-accent;
+    @apply bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent;
   }
 
-  /* Eyebrow / section label */
-  .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.18em] text-brand;
-  }
-
-  /* Icon tile used across cards/footers */
   .icon-tile {
-    @apply inline-flex items-center justify-center rounded-xl border border-white/10 text-brand
-           transition-all duration-300 ease-premium
-           hover:-translate-y-0.5 hover:border-brand/50 hover:text-brand-light hover:shadow-glow;
-    background-color: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    @apply inline-flex items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-sky-400
+           transition-colors duration-200 hover:border-sky-400/30 hover:bg-sky-400/10 hover:text-sky-300;
   }
 
-  /* Ambient blurred glow orb */
-  .glow-orb {
-    @apply absolute rounded-full pointer-events-none mix-blend-screen;
-    filter: blur(100px);
+  /* ---------- Precision Capabilities Ticker (Marquee) ---------- */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 
-  /* Hairline divider with gradient falloff */
-  .divider-glow {
-    @apply w-full h-px border-0 bg-gradient-line;
+  .ticker-track {
+    @apply flex w-max;
+    animation: marquee 36s linear infinite;
   }
 
-  /* Subtle animated grid overlay for hero/auth backgrounds */
-  .grid-overlay {
-    @apply absolute inset-0 pointer-events-none bg-grid-faint bg-grid-60;
-    animation: gridDrift 12s linear infinite;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-  }
-
-  /* Image containers: subtle zoom + brighten on group hover */
-  .media-frame {
-    @apply relative overflow-hidden rounded-2xl border border-white/[0.07] shadow-card
-           transition-all duration-500 ease-premium;
-  }
-  .media-frame img {
-    @apply transition-transform duration-[900ms] ease-premium;
-  }
-  .group:hover .media-frame img,
-  .media-frame:hover img {
-    @apply scale-[1.06];
-  }
-
-  /* Link with arrow that slides on hover */
-  .link-arrow {
-    @apply inline-flex items-center gap-1 font-semibold text-brand transition-all duration-300 ease-premium hover:text-brand-light;
-  }
-  .link-arrow i {
-    @apply transition-transform duration-300 ease-premium;
-  }
-  .group:hover .link-arrow i,
-  .link-arrow:hover i {
-    @apply translate-x-1;
+  .ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
   }
 }
 
-/* ============================================================
-   KEYFRAMES
-   ============================================================ */
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-@keyframes sheen {
-  0%   { transform: translateX(-120%) skewX(-18deg); }
-  100% { transform: translateX(220%) skewX(-18deg); }
-}
-
-@keyframes gridDrift {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(60px); }
-}
-
-@keyframes loadLine {
-  0%   { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
-}
-
-/* ============================================================
-   AOS refinement — softer, more expensive-feeling reveals
-   ============================================================ */
-[data-aos] {
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
-}
-
-[data-aos="fade-up"]    { transform: translate3d(0, 40px, 0); }
-[data-aos="fade-right"] { transform: translate3d(-40px, 0, 0); }
-[data-aos="fade-left"]  { transform: translate3d(40px, 0, 0); }
-[data-aos="zoom-in"]    { transform: scale(0.94); }
-
-/* ============================================================
-   ACCESSIBILITY — respect reduced-motion preferences
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
   .ticker-track { animation: none !important; }
-
-  [data-aos] {
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }

@@ -1,124 +1,176 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
 
 const About = () => {
   return (
-    <div className="bg-paper">
-      
-      {/* Minimal Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-white/[0.06] bg-surface/40 relative overflow-hidden">
-        <div className="glow-orb top-[-120px] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-brand/[0.1] animate-blob"></div>
-        <div className="glow-orb bottom-[-100px] right-[6%] w-[340px] h-[340px] bg-accent/[0.08] animate-blob-slow"></div>
-        <div className="container mx-auto px-6 max-w-7xl text-center relative z-10" data-aos="fade-up">
-          <div className="eyebrow mb-4">Who We Are</div>
-          <h1 className="mb-6">The Engineering <span className="text-gradient">Philosophy</span></h1>
-          <p className="text-lg text-muted max-w-3xl mx-auto">
-            We are a highly technical engineering agency focused strictly on performance, security, and absolute precision in everything we build.
+    <div className="bg-[#07090E] text-[#F8FAFC]">
+      {/* Hero */}
+      <section className="relative pt-16 pb-20 lg:pt-24 lg:pb-24 border-b border-white/[0.07] overflow-hidden">
+        <div className="absolute inset-0 arch-grid-bg pointer-events-none" />
+        <div className="absolute inset-0 top-spotlight pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center relative z-10">
+          <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+            WHO WE ARE
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6">
+            About{' '}
+            <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+              HIGH IN SKY SOLUTIONS.
+            </span>
+          </h1>
+          <p className="text-lg text-[#94A3B8] max-w-3xl mx-auto leading-relaxed">
+            We help businesses succeed online with modern website design, custom software, mobile apps, and smart automation.
           </p>
         </div>
       </section>
 
-      {/* Core Principles */}
-      <section className="py-24 lg:py-32 border-b border-white/[0.06] bg-paper overflow-hidden relative">
-        <div className="glow-orb top-[15%] right-[-8%] w-[400px] h-[400px] bg-accent/[0.06]"></div>
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-            <div data-aos="fade-right">
-              <div className="media-frame aspect-square lg:aspect-auto lg:h-[500px] border-brand/25 shadow-glow">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80" alt="Server room" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand/15 via-transparent to-accent/10 pointer-events-none"></div>
+      {/* Studio Photo + Our Story */}
+      <section className="py-24 lg:py-28 border-b border-white/[0.06] relative">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left Studio Photograph */}
+            <div className="lg:col-span-6">
+              <div className="relative rounded-2xl overflow-hidden border border-white/[0.1] bg-[#0D111A] shadow-[0_20px_50px_rgba(0,0,0,0.6)] group">
+                <div className="aspect-[4/3] w-full overflow-hidden">
+                  <SmartImage
+                    src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=85"
+                    alt="HIGH IN SKY SOLUTIONS Modern Workspace"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07090E]/80 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
-            <div data-aos="fade-left">
-              <div className="eyebrow mb-4">Our Standard</div>
-              <h2 className="mb-6">No templates.<br/><span className="text-gradient">No compromises.</span></h2>
-              <div className="text-muted text-lg space-y-6 mb-10">
+            {/* Right Story Narrative */}
+            <div className="lg:col-span-6">
+              <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+                OUR COMMITMENT
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-6">
+                Quality design.{' '}
+                <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+                  Real business results.
+                </span>
+              </h2>
+              <div className="space-y-5 text-base text-[#94A3B8] leading-relaxed mb-8">
                 <p>
-                  Most agencies focus purely on surface-level design. We focus on the entire stack. True digital success requires a combination of precise UI design, impenetrable backend security, and scalable cloud architecture.
+                  Your website and digital tools are often the very first impression a customer has of your business. We focus on making that impression count with clean, attractive designs and dependable performance.
                 </p>
                 <p>
-                  When you partner with us, you receive a complete, robust digital ecosystem engineered to accelerate your operations.
+                  When you work with HIGH IN SKY SOLUTIONS, you get a dedicated partner who listens to your needs, explains everything clearly, and delivers a complete solution ready to grow your business.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-white/[0.07]">
-                <div className="group">
-                  <div className="text-sm font-semibold text-ink mb-1 flex items-center gap-2">
-                    <i className="bi bi-code-slash text-brand transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]"></i> Clean Code
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/[0.08]">
+                <div className="p-4 rounded-xl bg-[#0D111A]/80 border border-white/[0.07]">
+                  <div className="flex items-center gap-2.5 text-sm font-semibold text-[#F8FAFC] mb-1">
+                    <Sparkles className="w-4 h-4 text-sky-400" />
+                    <span>Tailored to You</span>
                   </div>
-                  <p className="text-sm text-muted">Audited &amp; optimized.</p>
+                  <p className="text-xs text-[#94A3B8]">
+                    Custom designs built around your brand and customers.
+                  </p>
                 </div>
-                <div className="group">
-                  <div className="text-sm font-semibold text-ink mb-1 flex items-center gap-2">
-                    <i className="bi bi-speedometer2 text-brand transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]"></i> Fast Load Times
+                <div className="p-4 rounded-xl bg-[#0D111A]/80 border border-white/[0.07]">
+                  <div className="flex items-center gap-2.5 text-sm font-semibold text-[#F8FAFC] mb-1">
+                    <Zap className="w-4 h-4 text-sky-400" />
+                    <span>Fast &amp; Dependable</span>
                   </div>
-                  <p className="text-sm text-muted">99+ Core Web Vitals.</p>
+                  <p className="text-xs text-[#94A3B8]">
+                    Smooth performance across all phones and computers.
+                  </p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* Founder Section - Clean Grid */}
-      <section className="py-24 lg:py-32 bg-surface/40 overflow-hidden relative">
-        <div className="glow-orb bottom-[10%] left-[-8%] w-[420px] h-[420px] bg-brand/[0.07]"></div>
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
-
-            <div className="lg:col-span-4" data-aos="fade-right">
-              <div className="media-frame aspect-[3/4] group">
-                <img src="/assets/img/gagan.png" alt="Gagan Ganesh Moolya" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-paper/50 via-transparent to-transparent pointer-events-none"></div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8" data-aos="fade-left">
-              <div className="eyebrow mb-4">Leadership</div>
-              <h2 className="mb-8">Built by engineers, for <span className="text-gradient">modern businesses.</span></h2>
-
-              <div className="glass-panel p-8 lg:p-12 overflow-hidden">
-                <div className="glow-orb top-[-40px] right-[-40px] w-40 h-40 bg-brand/[0.1]"></div>
-                <i className="bi bi-quote absolute top-6 right-8 text-6xl text-brand/15 pointer-events-none"></i>
-                <p className="text-lg text-ink font-medium leading-relaxed italic mb-8 relative z-10">
-                  "I started HIGH IN SKY SOLUTIONS because I saw too many businesses struggling with slow, insecure, and outdated digital systems.
-                  My goal was to create an engineering agency that doesn't just deliver code, but delivers measurable business value through high-performance technology."
-                </p>
-                <div className="flex items-center gap-4 relative z-10">
-                  <div className="w-11 h-11 rounded-full bg-gradient-brand text-[#04141a] flex items-center justify-center font-bold text-sm shadow-glow-btn">
-                    GM
+      {/* Founder Section */}
+      <section className="py-24 lg:py-28 border-b border-white/[0.06] bg-[#0A0D14]/60">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-4">
+              <div className="rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0D111A] aspect-[3/4] relative">
+                <SmartImage
+                  src="/assets/img/gagan.png"
+                  alt="Gagan Ganesh Moolya — Founder"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07090E]/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-[#07090E]/90 backdrop-blur-md border border-white/[0.08]">
+                  <div className="text-sm font-semibold text-[#F8FAFC]">
+                    Gagan Ganesh Moolya
                   </div>
-                  <div>
-                    <div className="font-bold text-ink text-sm mb-0.5">Gagan Ganesh Moolya</div>
-                    <div className="text-brand text-xs font-semibold">Founder &amp; Lead Engineer</div>
+                  <div className="text-xs text-sky-400">
+                    Founder · HIGH IN SKY SOLUTIONS
                   </div>
                 </div>
               </div>
             </div>
 
+            <div className="lg:col-span-8">
+              <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+                LEADERSHIP
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-7">
+                Dedicated to helping{' '}
+                <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+                  your business grow.
+                </span>
+              </h2>
+
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0D111A]/90 p-8 sm:p-10 relative">
+                <p className="text-lg text-[#F8FAFC] leading-relaxed mb-8">
+                  &ldquo;I started HIGH IN SKY SOLUTIONS because I saw too many businesses struggling with slow, outdated websites and complicated software. My goal was to create a company that delivers clean, attractive, and reliable digital solutions that genuinely help business owners attract more clients and save time.&rdquo;
+                </p>
+
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/[0.07]">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-11 h-11 rounded-lg bg-sky-400 text-slate-950 font-bold text-sm flex items-center justify-center">
+                      GM
+                    </div>
+                    <div>
+                      <div className="font-semibold text-[#F8FAFC] text-sm">
+                        Gagan Ganesh Moolya
+                      </div>
+                      <div className="text-xs text-sky-400">
+                        Founder &amp; Lead Engineer · Mumbai, India
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Minimal CTA */}
-      <section className="py-24 lg:py-32 bg-paper text-center border-t border-white/[0.06] relative overflow-hidden">
-        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-brand/[0.08] animate-glow-pulse"></div>
-        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-accent/[0.06]"></div>
-        <div className="container mx-auto px-6 max-w-3xl relative z-10" data-aos="fade-up">
-          <h2 className="text-ink mb-6">Upgrade your <span className="text-gradient">technology.</span></h2>
-          <p className="text-lg text-muted mb-10">
-            Let's discuss how we can engineer a custom solution to scale your business operations securely.
+      {/* CTA */}
+      <section className="py-20 lg:py-24 px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
+            Ready to upgrade your{' '}
+            <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+              online presence?
+            </span>
+          </h2>
+          <p className="text-base sm:text-lg text-[#94A3B8] mb-8">
+            Let&apos;s talk about your project and build a solution your customers will love.
           </p>
-          <Link className="btn btn-brand btn-lg group" to="/contact">
-            Schedule a Technical Consultation
-            <i className="bi bi-arrow-right transition-transform duration-300 ease-premium group-hover:translate-x-1"></i>
+          <Link
+            to="/contact"
+            className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold px-7 py-3.5 rounded-lg inline-flex items-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all"
+          >
+            <span>Get in Touch</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
-
     </div>
   );
 };

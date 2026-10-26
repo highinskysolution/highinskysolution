@@ -1,43 +1,79 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Phone, Mail, MessageSquare, MapPin, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="pt-[120px] pb-8 border-t border-white/[0.06] mt-auto relative overflow-hidden bg-surface/40 backdrop-blur-xl">
-      {/* Ambient glows for layered depth */}
-      <div className="glow-orb bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[800px] h-[320px] bg-brand/[0.07]"></div>
-      <div className="glow-orb top-0 right-[8%] w-[360px] h-[360px] bg-accent/[0.06]"></div>
+    <footer className="border-t border-white/[0.08] bg-[#05070B] pt-16 pb-12 mt-auto relative overflow-hidden">
+      {/* Subtle Top Spotlight */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-sky-400/40 to-transparent" />
 
-      {/* Gradient hairline along the top edge */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-line"></div>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          {/* Column 1: Brand & Mission */}
+          <div className="lg:col-span-4 lg:pr-6">
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-3 mb-5 focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg"
+            >
+              <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#0D111A] border border-white/[0.1] group-hover:border-sky-400/40 transition-colors">
+                <img
+                  src="/assets/img/mark.png"
+                  alt="HIGH IN SKY SOLUTIONS logo"
+                  className="w-5 h-5 object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </span>
+              <span className="font-bold text-base tracking-tight text-[#F8FAFC] group-hover:text-sky-400 transition-colors">
+                HIGH IN SKY SOLUTIONS
+              </span>
+            </Link>
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16" data-aos="fade-up">
+            <p className="text-[#94A3B8] text-sm leading-relaxed mb-7">
+              Professional website designs, scalable cloud setups, secure software consulting, and customized workflow automation systems engineered for business operations.
+            </p>
 
-          {/* Column 1: Brand */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-4">
-            <div className="pr-0 lg:pr-8">
-              <Link className="group flex items-center gap-3 text-ink font-bold text-xl mb-5 transition-colors duration-300 hover:text-brand-light" to="/">
-                <span className="relative shrink-0">
-                  <span className="absolute inset-0 rounded-full bg-brand/25 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                  <img src="/assets/img/mark.png" alt="HIGH IN SKY SOLUTIONS logo" className="w-[34px] h-[34px] relative z-10 transition-transform duration-500 ease-premium group-hover:scale-110 group-hover:rotate-3" />
-                </span>
-                <span className="tracking-[-0.02em]">HIGH IN SKY SOLUTIONS</span>
+            {/* Quick Contact Action Buttons */}
+            <div className="flex items-center gap-2.5">
+              <a
+                href="tel:+918080273949"
+                aria-label="Phone Call +91 8080273949"
+                className="w-10 h-10 rounded-lg border border-white/[0.08] bg-[#0D111A]/80 flex items-center justify-center text-[#94A3B8] hover:text-sky-400 hover:border-sky-400/40 hover:shadow-[0_0_16px_rgba(56,189,248,0.2)] transition-all"
+              >
+                <Phone className="w-4 h-4" />
+              </a>
+              <a
+                href="mailto:highinskysolution@gmail.com"
+                aria-label="Email highinskysolution@gmail.com"
+                className="w-10 h-10 rounded-lg border border-white/[0.08] bg-[#0D111A]/80 flex items-center justify-center text-[#94A3B8] hover:text-sky-400 hover:border-sky-400/40 hover:shadow-[0_0_16px_rgba(56,189,248,0.2)] transition-all"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/918080273949"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Direct"
+                className="w-10 h-10 rounded-lg border border-white/[0.08] bg-[#0D111A]/80 flex items-center justify-center text-[#94A3B8] hover:text-sky-400 hover:border-sky-400/40 hover:shadow-[0_0_16px_rgba(56,189,248,0.2)] transition-all"
+              >
+                <i className="bi bi-whatsapp text-sm" />
+              </a>
+              <Link
+                to="/contact"
+                aria-label="Direct Engineering Inquiry"
+                className="w-10 h-10 rounded-lg border border-white/[0.08] bg-[#0D111A]/80 flex items-center justify-center text-[#94A3B8] hover:text-sky-400 hover:border-sky-400/40 hover:shadow-[0_0_16px_rgba(56,189,248,0.2)] transition-all"
+              >
+                <MessageSquare className="w-4 h-4" />
               </Link>
-              <p className="text-muted text-sm leading-relaxed mb-8">Professional website designs, scalable cloud setups, secure software consulting, and customized workflow automation systems engineered for business operations.</p>
-              <div className="flex items-center gap-3">
-                <a href="tel:+918080273949" aria-label="Phone Call" className="icon-tile w-11 h-11 text-base"><i className="bi bi-telephone"></i></a>
-                <a href="mailto:highinskysolution@gmail.com" aria-label="Email" className="icon-tile w-11 h-11 text-base"><i className="bi bi-envelope"></i></a>
-                <a href="https://wa.me/918080273949" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="icon-tile w-11 h-11 text-base"><i className="bi bi-whatsapp"></i></a>
-                <Link to="/contact" aria-label="Inquiry" className="icon-tile w-11 h-11 text-base"><i className="bi bi-chat-left-text"></i></Link>
-              </div>
             </div>
           </div>
 
-          {/* Column 2: Navigation Links */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-2">
-            <h3 className="text-ink font-bold text-sm uppercase tracking-[0.16em] mb-6">Navigation</h3>
-            <ul className="flex flex-col gap-4">
+          {/* Column 2: Navigation */}
+          <div className="lg:col-span-2">
+            <h3 className="text-[#64748B] font-mono uppercase tracking-widest text-xs font-semibold mb-5">
+              Navigation
+            </h3>
+            <ul className="space-y-3.5">
               {[
                 { to: '/', label: 'Home' },
                 { to: '/about', label: 'About Us' },
@@ -48,20 +84,22 @@ const Footer = () => {
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className="group inline-flex items-center text-muted hover:text-brand transition-all duration-300 ease-premium text-sm font-medium"
+                    className="text-sm text-[#94A3B8] hover:text-sky-400 transition-colors inline-flex items-center gap-1 group"
                   >
-                    <i className="bi bi-arrow-right-short text-brand text-base w-0 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-premium"></i>
-                    {item.label}
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 transition-all text-sky-400" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Services Links */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-3">
-            <h3 className="text-ink font-bold text-sm uppercase tracking-[0.16em] mb-6">Our Services</h3>
-            <ul className="flex flex-col gap-4">
+          {/* Column 3: Our Services */}
+          <div className="lg:col-span-3">
+            <h3 className="text-[#64748B] font-mono uppercase tracking-widest text-xs font-semibold mb-5">
+              Our Services
+            </h3>
+            <ul className="space-y-3.5">
               {[
                 { to: '/services?filter=dev', label: 'Web Design & UI' },
                 { to: '/services?filter=dev', label: 'Software Development' },
@@ -72,44 +110,65 @@ const Footer = () => {
                 <li key={item.label}>
                   <Link
                     to={item.to}
-                    className="group inline-flex items-center text-muted hover:text-brand transition-all duration-300 ease-premium text-sm font-medium"
+                    className="text-sm text-[#94A3B8] hover:text-sky-400 transition-colors inline-flex items-center gap-1 group"
                   >
-                    <i className="bi bi-arrow-right-short text-brand text-base w-0 opacity-0 -translate-x-1 group-hover:w-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-premium"></i>
-                    {item.label}
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 transition-all text-sky-400" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-3">
-            <h3 className="text-ink font-bold text-sm uppercase tracking-[0.16em] mb-6">Contact</h3>
-            <ul className="flex flex-col gap-5">
-              <li className="flex items-start gap-3 text-muted text-sm group">
-                <i className="bi bi-geo-alt text-brand mt-0.5 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]"></i>
+          {/* Column 4: Contact & Headquarters */}
+          <div className="lg:col-span-3">
+            <h3 className="text-[#64748B] font-mono uppercase tracking-widest text-xs font-semibold mb-5">
+              Contact &amp; Headquarters
+            </h3>
+            <ul className="space-y-4 text-sm text-[#94A3B8]">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                 <span>Mumbai, Maharashtra, India</span>
               </li>
-              <li className="flex items-start gap-3 text-muted text-sm group">
-                <i className="bi bi-envelope text-brand mt-0.5 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]"></i>
-                <a href="mailto:highinskysolution@gmail.com" className="hover:text-ink transition-colors duration-300 break-all">highinskysolution@gmail.com</a>
+              <li className="flex items-start gap-3">
+                <Mail className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                <a
+                  href="mailto:highinskysolution@gmail.com"
+                  className="hover:text-[#F8FAFC] transition-colors break-all"
+                >
+                  highinskysolution@gmail.com
+                </a>
               </li>
-              <li className="flex items-start gap-3 text-muted text-sm group">
-                <i className="bi bi-telephone text-brand mt-0.5 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]"></i>
-                <a href="tel:+918080273949" className="hover:text-ink transition-colors duration-300">+91 80802 73949</a>
+              <li className="flex items-start gap-3">
+                <Phone className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                <a
+                  href="tel:+918080273949"
+                  className="font-mono tabular-nums hover:text-[#F8FAFC] transition-colors"
+                >
+                  +91 8080273949
+                </a>
               </li>
             </ul>
+
+            {/* Live System Status Indicator */}
+            <div className="mt-6 inline-flex items-center gap-2.5 px-3.5 py-2 rounded-lg border border-white/[0.08] bg-[#0D111A]/90">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span className="font-mono text-xs text-[#F8FAFC] tracking-wide">
+                All Systems Operational
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Row: Copyright */}
-        <div className="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-subtle tracking-[0.12em]">
-          <span className="font-bold uppercase">&copy; 2026 HIGH IN SKY SOLUTIONS. All rights reserved.</span>
-          <span className="text-center">
+        {/* Bottom Legal Bar */}
+        <div className="border-t border-white/[0.06] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <span>&copy; 2026 HIGH IN SKY SOLUTIONS. ALL RIGHTS RESERVED.</span>
+          <span>
             Designed &amp; Developed by{' '}
-            <span className="text-gradient-accent font-bold">HIGH IN SKY SOLUTIONS</span>
-            {' '}· Powered by{' '}
-            <span className="text-gradient-accent font-bold">Antigravity AI</span>
+            <span className="text-[#F8FAFC] font-medium">HIGH IN SKY SOLUTIONS</span>
           </span>
         </div>
       </div>

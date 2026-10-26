@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ShieldCheck,
+  ChevronDown,
+  ArrowRight,
+  MessageSquare,
+} from 'lucide-react';
+import { CUSTOMER_FAQS } from '../data/engineeringData';
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const [phone, setPhone] = useState('');
-  const [serviceOption, setServiceOption] = useState('Website Design');
+  const [serviceOption, setServiceOption] = useState('Website Design & Development');
   const [openFaq, setOpenFaq] = useState(0);
 
   useEffect(() => {
@@ -18,188 +28,336 @@ const Contact = () => {
     setPhone(e.target.value.replace(/[^0-9]/g, ''));
   };
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
-  const faqs = [
-    {
-      q: "What is your typical project timeline?",
-      a: "For custom website design and development, it usually takes 2–4 weeks depending on the complexity. Cloud infrastructure deployments and custom automations can typically be configured within 1–2 weeks."
-    },
-    {
-      q: "Do you provide post-launch support?",
-      a: "Yes. Every project includes 30 days of complimentary technical support. We also offer extended monthly hosting, monitoring, and security management plans."
-    },
-    {
-      q: "How does the billing structure work?",
-      a: "Our standard model operates on a milestone basis: a percentage upfront deposit to initiate development, with the remaining balance due upon milestone completions."
-    },
-    {
-      q: "Do you work with international clients?",
-      a: "Absolutely. We work with clients globally. All progress reviews and meetings are scheduled online in timezones convenient for you."
-    }
-  ];
-
   return (
-    <div className="bg-paper">
-      
-      {/* Minimal Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-white/[0.06] bg-surface/40 relative overflow-hidden">
-        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand/[0.09] animate-blob"></div>
-        <div className="glow-orb bottom-[-100px] right-[8%] w-[340px] h-[340px] bg-accent/[0.08] animate-blob-slow"></div>
-        <div className="container mx-auto px-6 max-w-7xl text-center relative z-10" data-aos="fade-up">
-          <div className="eyebrow mb-4">Get In Touch</div>
-          <h1 className="mb-6">Contact <span className="text-gradient">Engineering</span></h1>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
-            Direct line to our technical team. Submit your project requirements and we will return a comprehensive technical evaluation.
+    <div className="bg-[#07090E] text-[#F8FAFC]">
+      {/* Hero */}
+      <section className="relative pt-16 pb-16 lg:pt-24 lg:pb-20 border-b border-white/[0.07] overflow-hidden">
+        <div className="absolute inset-0 arch-grid-bg pointer-events-none" />
+        <div className="absolute inset-0 top-spotlight pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center relative z-10">
+          <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+            GET IN TOUCH
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6">
+            Contact{' '}
+            <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+              Our Team.
+            </span>
+          </h1>
+          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+            Have a question or ready to start your project? Send us a message or reach out directly on WhatsApp or phone.
           </p>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section className="py-24 border-b border-white/[0.06] bg-paper relative overflow-hidden">
-        <div className="glow-orb top-[10%] left-[-8%] w-[380px] h-[380px] bg-accent/[0.06]"></div>
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12">
+      {/* Contact Channels & Simple Quote Form */}
+      <section className="py-20 lg:py-28 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Column: Direct Channels */}
+            <div className="lg:col-span-4 space-y-6">
+              <div>
+                <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-2">
+                  DIRECT CONTACT
+                </div>
+                <h2 className="text-2xl font-semibold text-white mb-3">
+                  Reach Us Anytime
+                </h2>
+                <p className="text-sm text-[#94A3B8]">
+                  Call, email, or message us on WhatsApp for a quick response about your website or software project.
+                </p>
+              </div>
 
-            <div className="lg:col-span-4" data-aos="fade-right">
-              <h3 className="mb-6">Direct <span className="text-gradient">Contact</span></h3>
-
-              <div className="flex flex-col gap-6">
-                <a href="mailto:highinskysolution@gmail.com" className="flex items-center gap-4 group">
-                  <div className="icon-tile w-12 h-12 text-xl shrink-0 group-hover:bg-gradient-brand group-hover:text-[#04141a] group-hover:border-brand">
-                    <i className="bi bi-envelope"></i>
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-ink mb-1 group-hover:text-brand transition-colors">Email Support</div>
-                    <div className="text-sm text-muted">highinskysolution@gmail.com</div>
+              <div className="space-y-4">
+                <a
+                  href="mailto:highinskysolution@gmail.com"
+                  className="enterprise-card p-4 flex items-center gap-4 group block"
+                >
+                  <span className="w-11 h-11 rounded-lg bg-sky-400/10 border border-sky-400/25 flex items-center justify-center text-sky-400 shrink-0">
+                    <Mail className="w-5 h-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-xs text-[#64748B]">Email Us</div>
+                    <div className="text-sm font-semibold text-[#F8FAFC] group-hover:text-sky-400 transition-colors truncate">
+                      highinskysolution@gmail.com
+                    </div>
                   </div>
                 </a>
 
-                <a href="tel:+918080273949" className="flex items-center gap-4 group">
-                  <div className="icon-tile w-12 h-12 text-xl shrink-0 group-hover:bg-gradient-brand group-hover:text-[#04141a] group-hover:border-brand">
-                    <i className="bi bi-telephone"></i>
-                  </div>
+                <a
+                  href="tel:+918080273949"
+                  className="enterprise-card p-4 flex items-center gap-4 group block"
+                >
+                  <span className="w-11 h-11 rounded-lg bg-sky-400/10 border border-sky-400/25 flex items-center justify-center text-sky-400 shrink-0">
+                    <Phone className="w-5 h-5" />
+                  </span>
                   <div>
-                    <div className="text-sm font-semibold text-ink mb-1 group-hover:text-brand transition-colors">Phone / WhatsApp</div>
-                    <div className="text-sm text-muted">+91 80802 73949</div>
+                    <div className="text-xs text-[#64748B]">Phone</div>
+                    <div className="text-sm font-semibold text-[#F8FAFC] group-hover:text-sky-400 transition-colors">
+                      +91 8080273949
+                    </div>
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 group">
-                  <div className="icon-tile w-12 h-12 text-xl shrink-0 shadow-glow">
-                    <i className="bi bi-geo-alt"></i>
-                  </div>
+                <a
+                  href="https://wa.me/918080273949"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="enterprise-card p-4 flex items-center gap-4 group block"
+                >
+                  <span className="w-11 h-11 rounded-lg bg-sky-400/10 border border-sky-400/25 flex items-center justify-center text-sky-400 shrink-0">
+                    <MessageSquare className="w-5 h-5" />
+                  </span>
                   <div>
-                    <div className="text-sm font-semibold text-ink mb-1">Headquarters</div>
-                    <div className="text-sm text-muted">Mumbai, Maharashtra, India</div>
+                    <div className="text-xs text-[#64748B]">WhatsApp</div>
+                    <div className="text-sm font-semibold text-[#F8FAFC] group-hover:text-sky-400 transition-colors">
+                      Chat with Us on WhatsApp →
+                    </div>
+                  </div>
+                </a>
+
+                <div className="enterprise-card p-4 flex items-center gap-4">
+                  <span className="w-11 h-11 rounded-lg bg-sky-400/10 border border-sky-400/25 flex items-center justify-center text-sky-400 shrink-0">
+                    <MapPin className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <div className="text-xs text-[#64748B]">Location</div>
+                    <div className="text-sm font-semibold text-[#F8FAFC]">
+                      Mumbai, Maharashtra, India
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-8" data-aos="fade-left">
-              <div className="glass-panel p-8 lg:p-10 overflow-hidden">
-                <div className="glow-orb top-[-40px] right-[-40px] w-56 h-56 bg-brand/[0.1]"></div>
-
-                <div className="mb-8 pb-6 border-b border-white/[0.07] relative z-10">
-                  <h3 className="mb-2">Request an <span className="text-gradient">Evaluation</span></h3>
-                  <p className="text-sm text-muted">Please provide as much technical detail as possible.</p>
+            {/* Right Column: Simple Quote Form */}
+            <div className="lg:col-span-8">
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0D111A]/90 p-7 sm:p-10">
+                <div className="mb-8 pb-5 border-b border-white/[0.07]">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-[#F8FAFC] mb-1.5">
+                    Request a Free Quote
+                  </h3>
+                  <p className="text-sm text-[#94A3B8]">
+                    Fill in your details below and we will get back to you promptly.
+                  </p>
                 </div>
-                
-                <form action="https://formsubmit.co/highinskysolution@gmail.com" method="POST" className="relative z-10">
-                  <input type="text" name="_honey" style={{ display: 'none' }} />
+
+                <form
+                  action="https://formsubmit.co/highinskysolution@gmail.com"
+                  method="POST"
+                  className="space-y-6"
+                >
+                  <input type="text" name="_honey" className="hidden" />
                   <input type="hidden" name="_template" value="table" />
-                  <input type="hidden" name="_subject" value="New HIGH IN SKY SOLUTIONS Inquiry!" />
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New HIGH IN SKY SOLUTIONS Inquiry!"
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="name">Full Name</label>
-                      <input className="field-input" id="name" name="name" type="text" required />
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="name"
+                      >
+                        Your Full Name
+                      </label>
+                      <input
+                        className="field-input"
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Enter your name"
+                        required
+                      />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="email">Email Address</label>
-                      <input className="field-input" id="email" name="email" type="email" required />
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="email"
+                      >
+                        Email Address
+                      </label>
+                      <input
+                        className="field-input"
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        required
+                      />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="phone">Phone Number</label>
-                      <input className="field-input" id="phone" name="phone" type="tel" maxLength="10" pattern="[0-9]{10}" value={phone} onChange={handlePhoneChange} />
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="phone"
+                      >
+                        Phone / WhatsApp Number
+                      </label>
+                      <input
+                        className="field-input"
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        maxLength="10"
+                        pattern="[0-9]{10}"
+                        placeholder="10-digit mobile number"
+                        value={phone}
+                        onChange={handlePhoneChange}
+                      />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="budget">Estimated Budget</label>
-                      <select className="field-input appearance-none cursor-pointer" id="budget" name="budget" defaultValue="Need guidance">
-                        <option className="bg-surface text-ink">Need guidance</option>
-                        <option className="bg-surface text-ink">Basic website</option>
-                        <option className="bg-surface text-ink">Business website</option>
-                        <option className="bg-surface text-ink">Custom project</option>
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="budget"
+                      >
+                        Project Type / Budget
+                      </label>
+                      <select
+                        className="field-input cursor-pointer"
+                        id="budget"
+                        name="budget"
+                        defaultValue="Need guidance"
+                      >
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Need guidance
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Starter Business Website
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Company Website / Online Store
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Custom App or Business Software
+                        </option>
                       </select>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="service">Primary Service Required</label>
-                      <select className="field-input appearance-none cursor-pointer" id="service" name="service" value={serviceOption} onChange={(e) => setServiceOption(e.target.value)}>
-                        <option className="bg-surface text-ink">Website Design</option>
-                        <option className="bg-surface text-ink">Software Development</option>
-                        <option className="bg-surface text-ink">App Development</option>
-                        <option className="bg-surface text-ink">Business Apps</option>
-                        <option className="bg-surface text-ink">AI Integration</option>
-                        <option className="bg-surface text-ink">Automation</option>
-                        <option className="bg-surface text-ink">Cloud Solution</option>
-                        <option className="bg-surface text-ink">IT Consulting</option>
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="service"
+                      >
+                        Service You Need
+                      </label>
+                      <select
+                        className="field-input cursor-pointer"
+                        id="service"
+                        name="service"
+                        value={serviceOption}
+                        onChange={(e) => setServiceOption(e.target.value)}
+                      >
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Website Design &amp; Development
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Custom Web Applications
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Mobile App Development
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Business Dashboards &amp; Portals
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          Workflow Automation
+                        </option>
+                        <option className="bg-[#0D111A] text-[#F8FAFC]">
+                          AI Assistants &amp; Cloud Setup
+                        </option>
                       </select>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-semibold text-ink mb-2" htmlFor="message">Technical Requirements</label>
-                      <textarea className="field-input resize-y min-h-[120px]" id="message" name="message" required></textarea>
+                      <label
+                        className="block text-xs font-semibold text-[#F8FAFC] mb-2"
+                        htmlFor="message"
+                      >
+                        Tell Us About Your Project
+                      </label>
+                      <textarea
+                        className="field-input resize-y min-h-[120px]"
+                        id="message"
+                        name="message"
+                        placeholder="How can we help your business?"
+                        required
+                      />
                     </div>
                   </div>
-                  
-                  <button className="btn btn-brand w-full" type="submit">
-                    Submit Requirements
+
+                  <button
+                    className="w-full bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold py-3.5 px-6 rounded-lg inline-flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all"
+                    type="submit"
+                  >
+                    <span>Send Inquiry</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
-                  
-                  <p className="text-xs text-muted text-center mt-4">
-                    <i className="bi bi-shield-lock text-brand mr-1"></i> Form data is encrypted and securely transmitted.
+
+                  <p className="text-xs text-[#64748B] text-center flex items-center justify-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-sky-400" />
+                    <span>Your information is kept 100% private and secure.</span>
                   </p>
                 </form>
               </div>
             </div>
-            
           </div>
         </div>
       </section>
 
-      {/* Minimal FAQ Section */}
-      <section className="py-24 lg:py-32 bg-surface/40 relative overflow-hidden">
-        <div className="glow-orb bottom-[5%] right-[-8%] w-[400px] h-[400px] bg-brand/[0.07]"></div>
-        <div className="container mx-auto px-6 max-w-3xl relative z-10">
-          <div className="text-center mb-12" data-aos="fade-up">
-            <div className="eyebrow mb-4">Support</div>
-            <h2 className="mb-4">Frequently Asked <span className="text-gradient">Questions</span></h2>
-            <p className="text-muted text-lg">Standard policies and procedures.</p>
+      {/* FAQ Section */}
+      <section className="py-20 lg:py-28 bg-[#0A0D14]/60">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+              SUPPORT
+            </div>
+            <h2 className="text-3xl font-semibold text-white mb-3">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm sm:text-base text-[#94A3B8]">
+              Answers to common questions about our services and process.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-4" data-aos="fade-up">
-            {faqs.map((faq, index) => (
-              <div key={index} className={`glass-panel overflow-hidden transition-all duration-300 ease-premium ${openFaq === index ? 'border-brand/30 shadow-glow' : ''}`}>
-                <button
-                  className="w-full text-left px-6 py-4 flex items-center justify-between focus:outline-none"
-                  onClick={() => toggleFaq(index)}
+          <div className="space-y-3.5">
+            {CUSTOMER_FAQS.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div
+                  key={faq.q}
+                  className={`rounded-xl border transition-colors duration-200 ${
+                    isOpen
+                      ? 'border-sky-400/40 bg-[#0D111A]'
+                      : 'border-white/[0.08] bg-[#0D111A]/60 hover:border-white/[0.15]'
+                  }`}
                 >
-                  <span className={`text-sm font-semibold transition-colors ${openFaq === index ? 'text-brand' : 'text-ink'}`}>{faq.q}</span>
-                  <i className={`bi bi-chevron-down transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-brand' : 'text-muted'}`}></i>
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <div className="px-6 pb-5 pt-0 text-muted text-sm leading-relaxed">
-                    {faq.a}
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                    className="w-full px-6 py-4 text-left flex items-center justify-between gap-4"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-sm sm:text-base font-semibold text-[#F8FAFC]">
+                      {faq.q}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-sky-400 shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-6 pb-5 pt-3 border-t border-white/[0.06] text-sm text-[#94A3B8] leading-relaxed">
+                      {faq.a}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
-
     </div>
   );
 };

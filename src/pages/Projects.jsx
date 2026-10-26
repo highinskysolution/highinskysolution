@@ -1,126 +1,164 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
+import { FEATURED_PROJECTS, DELIVERY_STEPS } from '../data/engineeringData';
 
 const Projects = () => {
   return (
-    <div className="bg-paper">
-      
-      {/* Minimal Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-white/[0.06] bg-surface/40 relative overflow-hidden">
-        <div className="glow-orb top-[-120px] left-[-60px] w-[440px] h-[440px] bg-brand/[0.11] animate-blob"></div>
-        <div className="glow-orb bottom-[-120px] right-[-60px] w-[360px] h-[360px] bg-accent/[0.08] animate-blob-slow"></div>
-        <div className="container mx-auto px-6 max-w-7xl text-center relative z-10" data-aos="fade-up">
-          <div className="eyebrow mb-4">Our Work</div>
-          <h1 className="mb-6">Portfolio & <span className="text-gradient">Process</span></h1>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
-            A showcase of our structured engineering process and recent deployments.
+    <div className="bg-[#07090E] text-[#F8FAFC]">
+      {/* Hero */}
+      <section className="relative pt-16 pb-16 lg:pt-24 lg:pb-20 border-b border-white/[0.07] overflow-hidden">
+        <div className="absolute inset-0 arch-grid-bg pointer-events-none" />
+        <div className="absolute inset-0 top-spotlight pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center relative z-10">
+          <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+            OUR WORK &amp; PROCESS
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white mb-6">
+            Portfolio &amp;{' '}
+            <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+              Solutions.
+            </span>
+          </h1>
+          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+            See how we help businesses grow with modern websites, custom dashboards, and mobile applications.
           </p>
         </div>
       </section>
 
-      {/* Case Studies Empty State - Clean Card */}
-      <section className="py-24 border-b border-white/[0.06] bg-paper relative overflow-hidden">
-        <div className="glow-orb top-0 right-[10%] w-[360px] h-[360px] bg-accent/[0.06]"></div>
-        <div className="container mx-auto px-6 max-w-4xl relative z-10">
-          <div className="enterprise-card text-center p-12 bg-surface/50" data-aos="zoom-in">
-            <div className="glow-orb top-[-40px] right-[-40px] w-52 h-52 bg-brand/[0.12]"></div>
-            <div className="icon-tile w-16 h-16 text-2xl mx-auto mb-6 border-brand/30 shadow-glow relative z-10">
-              <i className="bi bi-rocket-takeoff"></i>
+      {/* Featured Visual Projects */}
+      <section className="py-20 lg:py-28 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-10">
+          {FEATURED_PROJECTS.map((project, idx) => (
+            <div
+              key={project.id}
+              className="enterprise-card overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center"
+            >
+              <div className="lg:col-span-5 h-64 lg:h-full relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/[0.07]">
+                <SmartImage
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D111A]/80 via-transparent to-transparent lg:hidden" />
+              </div>
+
+              <div className="lg:col-span-7 p-7 sm:p-10">
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  <span className="font-mono text-xs text-sky-400 uppercase tracking-widest">
+                    0{idx + 1}. {project.category}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-sky-400/10 border border-sky-400/25 text-xs font-semibold text-sky-300">
+                    {project.highlight}
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
+                  {project.title}
+                </h2>
+                <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed mb-6">
+                  {project.summary}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-white/[0.07]">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs text-slate-300 bg-white/[0.04] border border-white/[0.08] px-3 py-1 rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 hover:text-sky-300"
+                  >
+                    <span>Build Something Similar</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
             </div>
-            <h2 className="text-2xl mb-4 relative z-10">Case Studies <span className="text-gradient">Curating</span></h2>
-            <p className="text-muted mb-8 max-w-[500px] mx-auto text-sm relative z-10">
-              We are currently documenting detailed technical reviews of our latest scalable web deployments. Check back shortly.
+          ))}
+        </div>
+      </section>
+
+      {/* 4-Step Delivery Process */}
+      <section className="py-20 lg:py-28 bg-[#0A0D14]/60 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-3">
+              HOW WE WORK
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
+              Our 4-Step Process
+            </h2>
+            <p className="text-base text-[#94A3B8]">
+              A simple, transparent process from your first consultation to launch day.
             </p>
-            <div className="flex justify-center relative z-10">
-              <Link to="/services" className="btn btn-brand group">
-                Explore Capabilities
-                <i className="bi bi-arrow-right transition-transform duration-300 ease-premium group-hover:translate-x-1"></i>
-              </Link>
-            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {DELIVERY_STEPS.map((step) => (
+              <div
+                key={step.number}
+                className="enterprise-card p-6 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="font-mono text-xs font-bold text-sky-400 bg-sky-400/10 border border-sky-400/25 px-3 py-1 rounded inline-block mb-4">
+                    STEP {step.number}
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#F8FAFC] mb-2.5">
+                    {step.shortTitle}
+                  </h3>
+                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
+                    {step.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/[0.07] space-y-2">
+                  {step.deliverables.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-2 text-xs text-slate-300"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Process - Structured List */}
-      <section className="py-24 lg:py-32 bg-surface/40 relative overflow-hidden">
-        <div className="glow-orb bottom-[10%] left-[-8%] w-[420px] h-[420px] bg-brand/[0.07]"></div>
-        <div className="container mx-auto px-6 max-w-5xl relative z-10">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <div className="eyebrow mb-4">How We Build</div>
-            <h2 className="mb-4">Engineering <span className="text-gradient">Methodology</span></h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">A strict, four-phase building process designed to eliminate technical debt.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <div className="enterprise-card p-8 bg-paper/50" data-aos="fade-up">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-brand text-[#04141a] flex items-center justify-center font-bold font-mono text-sm shadow-glow-btn shrink-0">01</div>
-                <h3 className="text-xl mb-0">Architecture & Scope</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-6">We map out the database schema, user flows, server architecture, and complete technical scope before writing a single line of code.</p>
-              <ul className="flex flex-col gap-2 border-t border-white/[0.07] pt-4">
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> Data Modeling</li>
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> API Specifications</li>
-              </ul>
-            </div>
-
-            <div className="enterprise-card p-8 bg-paper/50" data-aos="fade-up" data-aos-delay="100">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-brand text-[#04141a] flex items-center justify-center font-bold font-mono text-sm shadow-glow-btn shrink-0">02</div>
-                <h3 className="text-xl mb-0">UI Prototyping</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-6">Creating pixel-perfect, responsive Figma prototypes to lock in the visual aesthetics and structural layouts.</p>
-              <ul className="flex flex-col gap-2 border-t border-white/[0.07] pt-4">
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> Wireframing</li>
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> Component Design</li>
-              </ul>
-            </div>
-
-            <div className="enterprise-card p-8 bg-paper/50" data-aos="fade-up" data-aos-delay="200">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-brand text-[#04141a] flex items-center justify-center font-bold font-mono text-sm shadow-glow-btn shrink-0">03</div>
-                <h3 className="text-xl mb-0">Secure Development</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-6">We write clean, modular front-end and back-end code with a high focus on speed, Core Web Vitals, and security.</p>
-              <ul className="flex flex-col gap-2 border-t border-white/[0.07] pt-4">
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> Clean Code</li>
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> Performance Optimization</li>
-              </ul>
-            </div>
-
-            <div className="enterprise-card p-8 bg-paper/50" data-aos="fade-up" data-aos-delay="300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-brand text-[#04141a] flex items-center justify-center font-bold font-mono text-sm shadow-glow-btn shrink-0">04</div>
-                <h3 className="text-xl mb-0">Deployment</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-6">Rigorous device testing, bug squashing, server configuration, and final handover of a robust digital product.</p>
-              <ul className="flex flex-col gap-2 border-t border-white/[0.07] pt-4">
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> QA Auditing</li>
-                <li className="text-xs font-semibold text-ink flex items-center gap-2"><i className="bi bi-arrow-right-short text-brand"></i> CI/CD Setup</li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Layer */}
-      <section className="bg-paper py-24 lg:py-32 text-center border-t border-white/[0.06] relative overflow-hidden">
-        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-brand/[0.08] animate-glow-pulse"></div>
-        <div className="glow-orb top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-accent/[0.06]"></div>
-        <div className="container mx-auto px-6 max-w-3xl relative z-10" data-aos="zoom-in">
-          <h2 className="text-ink mb-6">Have an <span className="text-gradient">ambitious project?</span></h2>
-          <p className="text-lg text-muted mb-10">
-            Submit your technical requirements and our engineering team will evaluate the scope.
+      {/* CTA */}
+      <section className="py-20 lg:py-24 text-center px-6">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-4">
+            Have a project{' '}
+            <span className="bg-gradient-to-r from-white via-slate-200 to-sky-400 bg-clip-text text-transparent">
+              in mind?
+            </span>
+          </h2>
+          <p className="text-base sm:text-lg text-[#94A3B8] mb-8">
+            Share your idea with us and we will help you turn it into a polished website or application.
           </p>
-          <Link className="btn btn-brand btn-lg group" to="/contact">
-            Submit Requirements
-            <i className="bi bi-arrow-right transition-transform duration-300 ease-premium group-hover:translate-x-1"></i>
+          <Link
+            to="/contact"
+            className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-semibold px-7 py-3.5 rounded-lg inline-flex items-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all"
+          >
+            <span>Start Your Project</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
-
     </div>
   );
 };

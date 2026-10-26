@@ -1,5 +1,32 @@
 import React, { useEffect, useRef } from 'react';
 
+const MOVIE_HACKER_CODE = [
+  '>>> INIT_KERNEL_STREAM [0x7FFF8A01] --force --turbo',
+  '[OK] AUTH_HANDSHAKE: RSA-4096 KEY EXCHANGE VERIFIED',
+  '0x00401000: 48 89 E5 48 83 EC 20 48 89 7D F8 89 75 F4',
+  'struct neural_socket *sock = alloc_edge_node(AP_SOUTH_1);',
+  'while (packet = stream->next_frame()) { decrypt_aes256(packet); }',
+  '>>> BYPASS_LATENCY: ROUTING VIA FIBER_BACKBONE_09',
+  '[SYS_TRACE] Compiling high_in_sky_core.so ... DONE (0.004s)',
+  '0x0040104A: 0F 84 C2 00 00 00 48 8B 45 F8 48 83 C0 10',
+  'export const DEPLOY_MATRIX = { nodes: 128, firewall: "ACTIVE" };',
+  'for (let i = 0; i < 0xFFFF; i++) { inject_edge_cache(i); }',
+  '[NET_SEC] Zero-Trust Tunnel -> 192.168.1.254:443 [LOCKED]',
+  '>>> EXECUTING QUANTUM_OPTIMIZER // THROUGHPUT: 42.8 GB/s',
+  '01001000 01001001 01010011 01010011 // SYNC_COMPLETE',
+  'void __fastcall kernel_dispatch(uint64_t *mem_addr) {',
+  '  __asm__ volatile("prefetchnta (%0)" :: "r"(mem_addr));',
+  '  *mem_addr ^= 0x5A5A5A5A5A5A5A5AULL;',
+  '}',
+  '[ACCESS_GRANTED] Uploading production build to global edge...',
+  '[################] 100% DEPLOYMENT VERIFIED // 0 ERRORS',
+  'root@high-in-sky-node01:~# ./deploy_autonomous_cluster.sh -y',
+  '>>> SPAWNING 64 WORKER THREADS ... [OK] [OK] [OK] [OK]',
+  '0x7FFFA210: E8 4B FE FF FF 85 C0 78 14 48 8B 15 92 20',
+  'SELECT * FROM enterprise_clusters WHERE status = "ONLINE";',
+  '[SHIELD_ACTIVE] DDoS Mitigation Matrix Online // 0 Loss',
+];
+
 const HackerBackground = () => {
   const canvasRef = useRef(null);
 
@@ -11,112 +38,159 @@ const HackerBackground = () => {
 
     let animationFrameId;
 
-    // Set canvas dimensions
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    resizeCanvas();
 
+    resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Hacker-style code snippets
-    const codeSnippets = [
-      "const cloud = new SkyAPI({ secure: true });",
-      "await cloud.connect('highinskysolutions.com');",
-      "function scaleCluster(nodes) {",
-      "  return nodes.map(n => n.deploy());",
-      "}",
-      "class DigitalInfrastructure extends Core {",
-      "  constructor() {",
-      "    super();",
-      "    this.security = 'AES-256';",
-      "    this.status = 'READY';",
-      "  }",
-      "}",
-      "import { autoPlay, loop, muted } from 'vite';",
-      "const apiToken = process.env.API_TOKEN;",
-      "db.leads.insert({ service, email, date });",
-      "SMTP.sendNotification({ to: 'admin', lead });",
-      "system.network.bandwidth.usage = '0.04%';",
-      "console.log('[OK] Infrastructure healthy.');",
-      "Object.freeze(securityHeaders);",
-      "nginx.configure({ port: 443, ssl: true });",
-      "01001000 01001001 01000111 01001000",
-      "01010011 01001011 01011001 01010011",
-      "const database = await connectMongo();",
-      "Vercel.deploy({ main: './dist', production: true });",
-      "const optimizedChunks = Webpack.optimize();"
+    const createTerminalStream = (index) => {
+      const startIdx = (index * 8) % MOVIE_HACKER_CODE.length;
+      const initialLines = [];
+      for (let i = 0; i < 8; i++) {
+        initialLines.push(
+          MOVIE_HACKER_CODE[(startIdx + i) % MOVIE_HACKER_CODE.length]
+        );
+      }
+      return {
+        index,
+        lines: initialLines,
+        currentIdx: (startIdx + 8) % MOVIE_HACKER_CODE.length,
+        charPos: 0,
+        speed: 4.5 + index * 1.2,
+        hexCounter: 0x1000 + index * 0x1000,
+      };
+    };
+
+    const streams = [
+      createTerminalStream(0),
+      createTerminalStream(1),
+      createTerminalStream(2),
     ];
 
-    const fontSize = 14;
-    const spacing = 28; // column width
-    const columns = Math.ceil(canvas.width / spacing);
-
-    // Initialize drop data for columns
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-      drops.push({
-        x: i * spacing,
-        y: Math.random() * -canvas.height - 50,
-        speed: 1 + Math.random() * 1.5,
-        snippetIndex: Math.floor(Math.random() * codeSnippets.length),
-        charOffset: 0
-      });
-    }
+    const getMovieLineColor = (line) => {
+      if (
+        line.startsWith('>>>') ||
+        line.includes('[ACCESS_GRANTED]') ||
+        line.includes('100%')
+      ) {
+        return '#34D399'; // Vivid Matrix Emerald
+      }
+      if (
+        line.startsWith('[OK]') ||
+        line.startsWith('[SYS') ||
+        line.startsWith('[NET') ||
+        line.startsWith('[SHIELD')
+      ) {
+        return '#38BDF8'; // Vivid Cyber Sky
+      }
+      if (line.startsWith('0x') || line.startsWith('0100')) {
+        return '#10B981'; // Clean Emerald Hex
+      }
+      if (line.startsWith('root@')) {
+        return '#67E8F9'; // Bright Terminal Prompt
+      }
+      return '#93C5FD'; // Crisp Ice Blue
+    };
 
     const draw = () => {
-      // Clear canvas with high transparency black to generate glow trails
-      ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
 
-      ctx.font = `${fontSize}px monospace`;
+      // Full crisp clear every frame — ZERO overlapping ghost characters
+      ctx.clearRect(0, 0, width, height);
 
-      drops.forEach((drop) => {
-        const snippet = codeSnippets[drop.snippetIndex];
-        const text = snippet;
-        
-        // Highlight the current character (leading character)
-        const charToShow = text.charAt(drop.charOffset % text.length);
-        ctx.fillStyle = '#67e8f9'; // brand.light
-        ctx.shadowColor = '#06b6d4';
-        ctx.shadowBlur = 8;
-        ctx.fillText(charToShow, drop.x, drop.y);
+      const fontSize = width < 640 ? 11.5 : 13;
+      const lineHeight = Math.round(fontSize * 1.85);
+      ctx.font = `600 ${fontSize}px "JetBrains Mono", monospace`;
+      ctx.textBaseline = 'alphabetic';
 
-        // Draw trailing characters fading away
-        ctx.shadowBlur = 0; // Turn off shadow blur for trails to optimize performance
-        
-        // 1st trailing char
-        ctx.fillStyle = 'rgba(6, 182, 212, 0.45)'; // brand.DEFAULT
-        const prevChar1 = text.charAt((drop.charOffset - 1 + text.length) % text.length);
-        ctx.fillText(prevChar1, drop.x, drop.y - fontSize);
+      // Choose number of non-overlapping columns based on screen width
+      const numCols = width < 768 ? 1 : width < 1280 ? 2 : 3;
+      const colGap = 28;
+      const totalGap = colGap * (numCols + 1);
+      const colWidth = Math.floor((width - totalGap) / numCols);
+      const maxLines = Math.max(8, Math.floor((height - 48) / lineHeight) - 1);
 
-        // 2nd trailing char
-        ctx.fillStyle = 'rgba(6, 182, 212, 0.25)';
-        const prevChar2 = text.charAt((drop.charOffset - 2 + text.length) % text.length);
-        ctx.fillText(prevChar2, drop.x, drop.y - fontSize * 2);
+      for (let sIdx = 0; sIdx < numCols; sIdx++) {
+        const stream = streams[sIdx];
+        const colX = colGap + sIdx * (colWidth + colGap);
+        const targetLine = MOVIE_HACKER_CODE[stream.currentIdx];
 
-        // 3rd trailing char
-        ctx.fillStyle = 'rgba(8, 145, 178, 0.15)'; // brand.dark
-        const prevChar3 = text.charAt((drop.charOffset - 3 + text.length) % text.length);
-        ctx.fillText(prevChar3, drop.x, drop.y - fontSize * 3);
-
-        // Advance drop position
-        drop.y += drop.speed;
-
-        // Progress character stream slowly
-        if (Math.random() > 0.3) {
-          drop.charOffset++;
+        // Advance fast movie-hacker typing
+        stream.charPos += stream.speed;
+        if (stream.charPos >= targetLine.length) {
+          stream.lines.push(targetLine);
+          while (stream.lines.length > maxLines) {
+            stream.lines.shift();
+          }
+          stream.currentIdx =
+            (stream.currentIdx + 1) % MOVIE_HACKER_CODE.length;
+          stream.charPos = 0;
+          stream.hexCounter += 0x10;
         }
 
-        // Reset column drop once it falls off screen
-        if (drop.y > canvas.height) {
-          drop.y = Math.random() * -100 - 50;
-          drop.speed = 1 + Math.random() * 1.5;
-          drop.snippetIndex = Math.floor(Math.random() * codeSnippets.length);
-          drop.charOffset = 0;
-        }
-      });
+        // Strictly clip each terminal column so columns NEVER overlap each other
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(colX, 0, colWidth, height);
+        ctx.clip();
+
+        // Subtle column divider line on left edge
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.14)';
+        ctx.fillRect(colX, 16, 1, height - 32);
+
+        // Draw scrolling history lines with strict vertical spacing
+        stream.lines.forEach((line, i) => {
+          const y = 32 + i * lineHeight;
+          const fade = Math.min(1, 0.35 + (i / stream.lines.length) * 0.65);
+          const addr = (stream.hexCounter - (stream.lines.length - i) * 16)
+            .toString(16)
+            .toUpperCase()
+            .padStart(4, '0');
+
+          ctx.globalAlpha = fade;
+
+          // Address column
+          ctx.fillStyle = '#64748B';
+          ctx.fillText(`0x${addr}`, colX + 10, y);
+
+          // Code line column (starts strictly after address column)
+          ctx.fillStyle = getMovieLineColor(line);
+          ctx.fillText(line, colX + 74, y);
+        });
+
+        // Draw active rapid-typing line at full brightness
+        ctx.globalAlpha = 1;
+        const activeY = 32 + stream.lines.length * lineHeight;
+        const typedSlice = targetLine.slice(0, Math.floor(stream.charPos));
+        const currentAddr = stream.hexCounter
+          .toString(16)
+          .toUpperCase()
+          .padStart(4, '0');
+
+        ctx.fillStyle = '#34D399';
+        ctx.fillText(`0x${currentAddr}`, colX + 10, activeY);
+
+        ctx.fillStyle = '#ECFDF5';
+        ctx.fillText(typedSlice, colX + 74, activeY);
+
+        // Glowing block cursor at typing head
+        const typedWidth = ctx.measureText(typedSlice).width;
+        ctx.fillStyle = '#34D399';
+        ctx.fillRect(
+          colX + 77 + typedWidth,
+          activeY - fontSize + 2,
+          8,
+          fontSize
+        );
+
+        ctx.restore();
+      }
 
       animationFrameId = requestAnimationFrame(draw);
     };
@@ -130,15 +204,17 @@ const HackerBackground = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+    <div
+      className="absolute inset-0 pointer-events-none overflow-hidden select-none"
       style={{
-        display: 'block',
-        backgroundColor: '#0a0a0a',
-        opacity: 0.25 // Subtle mix into background
+        maskImage:
+          'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 75%, transparent 100%)',
+        WebkitMaskImage:
+          'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 75%, transparent 100%)',
       }}
-    />
+    >
+      <canvas ref={canvasRef} className="w-full h-full block opacity-85" />
+    </div>
   );
 };
 
